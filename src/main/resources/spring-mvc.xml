@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:property-placeholder location="classpath:config.properties"
+		ignore-unresolvable="true" />
+
+	<context:component-scan base-package="com.province.platform.controllers" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- aop proxy:using cglib, byte code rewrite -->
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager"
+		conversion-service="conversionService">
+		<mvc:message-converters>
+			<!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+				<property name="supportedMediaTypes">
+					<list>
+						<bean class="org.springframework.http.MediaType">
+							<constructor-arg index="0" value="text" />
+							<constructor-arg index="1" value="plain" />
+							<constructor-arg index="2" value="UTF-8" />
+						</bean>
+						<bean class="org.springframework.http.MediaType">
+							<constructor-arg index="0" value="*" />
+							<constructor-arg index="1" value="*" />
+							<constructor-arg index="2" value="UTF-8" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+
+			<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+			<bean id="fastJsonHttpMessageConverter"
+				class="com.province.platform.commons.CloudFastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="features">
+					<array>
+						<value>QuoteFieldNames</value>
+						<value>WriteDateUseDateFormat</value>
+						<!-- 是否输出null值 -->
+						<value>WriteMapNullValue</value>
+						<value>DisableCircularReferenceDetect</value>
+						<value>IgnoreNonFieldGetter</value>
+						<value>SkipTransientField</value>
+					</array>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean id="DisableCircularReferenceDetect"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
+	</bean>
+	<!-- 全局日期转换 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.province.platform.commons.DateConverter" />
+			</list>
+		</property>
+	</bean>
+	<mvc:default-servlet-handler />
+
+
+
+
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<!-- 平台访问拦截 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.province.platform.interceptor.CompanyInterceptor">
+			</bean>
+		</mvc:interceptor>
+		<!-- 验证是否登录 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean
+				class="com.province.platform.interceptor.AnnotationHandlerInterceptor">
+				<property name="annotationTarget">
+					<value>TYPE_AND_METHOD</value>
+				</property>
+				<property name="annotationClass"
+					value="com.province.platform.annotations.LoginIntercept" />
+				<property name="handlerInterceptors">
+					<array>
+						<bean class="com.province.platform.interceptor.LoginInterceptor">
+						</bean>
+					</array>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="true" />
+		<property name="favorParameter" value="true" />
+		<property name="parameterName" value="format" />
+		<property name="ignoreAcceptHeader" value="false" />
+		<property name="mediaTypes">
+			<value>
+				json=application/json
+				xml=application/xml
+				html=text/html
+			</value>
+		</property>
+		<property name="defaultContentType" value="text/html" />
+	</bean>
+	<!-- ========================= VIEW定义 ========================= -->
+	<!-- 内容协商视图解析器；根据客户端的不同的请求决定不同的 view进行响应, 如 /blog/1.json /blog/1.xml -->
+	<!-- 会自动根据解析的contentType来决定使用哪个视图解析器（默认使用整个web应用中的viewResolver） -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<!-- 内容协商管理器 用于决定media type -->
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+		<!-- 默认视图 放在解析链最后 -->
+		<property name="defaultViews">
+			<list>
+				<bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView" />
+			</list>
+		</property>
+	</bean>
+	<!-- freemarker配置 -->
+	<bean id="freeMarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/template" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="template_update_delay">10</prop>
+				<prop key="number_format">#</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="boolean_format">true,false</prop>
+			</props>
+		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="resUrl" value="${resource.url}" />
+				<entry key="dataUrl" value="${data.url}" />
+				<entry key="imgUploadUrl" value="${image.upload.url}" />
+				<entry key="fileUploadUrl" value="${file.upload.url}" />
+				<entry key="examUrl" value="${exam.url}" />
+				<entry key="staticVersion" value="${static.resource.version}" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- widget配置 -->
+	<bean id="widget" class="com.province.platform.widgets.WidgetManager"
+		scope="singleton" init-method="initFreeMakerWidgets">
+		<property name="config" ref="config" />
+		<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer" />
+		<property name="freeMakerViewResolver" ref="freeMakerViewResolver"></property>
+		<property name="widgetClassPath" value="com/province/platform/widgets/*.class"></property>
+	</bean>
+
+	<!-- 注册widget -->
+	<util:map id="attributesMap">
+		<entry key="widget" value-ref="widget" />
+	</util:map>
+
+	<bean id="freeMakerViewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="requestContextAttribute" value="request" />
+		<property name="attributes" ref="attributesMap" />
+	</bean>
+
+	<!-- 错误页面配置 -->
+	<bean class="com.province.platform.helper.PlatformExceptionResolver">
+		<property name="defaultStatusCode" value="500"></property>
+		<property name="defaultErrorView" value="/views/fix"></property>
+		<property name="exceptionAttribute" value="ex"></property>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">/views/fix</prop>
+				<prop key="java.lang.Throwable">/views/fix</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 导入cookie配置 -->
+	<import resource="cookie.xml" />
+</beans>

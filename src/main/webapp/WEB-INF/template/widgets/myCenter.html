@@ -1,0 +1,24 @@
+<div class="ifm-left-menu">
+    <a class="header">
+        <img id="jUcUserAvatar" data-src="http://s1.zhongzhihui.com/p-youyong/dist/images/avatar/big.png" src="${(myCenterDto.avatarUrl)!}" />
+    </a>
+    <div id="jUcNickName" class="nick txt-overflow">${(myCenterDto.nickname)!}</div>
+    <ul class="menu-level-1 clearfix" id="jLeftMenu">
+    	<#list menus! as  menu>
+    		<li class="jItemLevel1 item-level-1 <#if (menu.current)!>active</#if>"  node-type="itemLevel1">
+    			<a href="${basePath!}${(menu.link)!}" class="txt-level-1" node-type="txtLevel1">${(menu.name)!}</a>
+<!--     			<#if (menu.twoMenus)?? > -->
+<!--     			<ul class="menu-level-2" node-type="menuLevel2"> -->
+<!--     				<#list menu.twoMenus as pmd> -->
+<!--     						<li class="jItemLevel2 item-level-2 <#if (pmd.current)!>active</#if>" node-type="itemLevel2"> -->
+<!-- 			                    <a href="${basePath!}${(pmd.link)!}" class="txt-level-2  ">${(pmd.name)!}</a> -->
+<!-- 			                </li> -->
+<!--     				</#list> -->
+<!--     			</ul> -->
+<!--     			</#if> -->
+    		</li>	
+    	</#list>
+    
+    
+    </ul>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>重设密码</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/reset-pwd.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    
+    <div class="mod-form clearfix">
+        <form id="jsRightSignin" class="right-signin common f-r">
+            <ul class="ulform">
+                <li class="item">
+                   <i class="icon iyoyo icon-phone-1"></i>
+                    <input class="ui-input" id="jMobile" name="mobile" autocomplete="off" type="text" placeholder="手机号" />
+                </li>
+                <li class="item">
+                    <i class="icon iyoyo icon-shield"></i>
+                    <input id="jDynamic" class="ui-input jDynamic" name="code" type="text" autocomplete="off" placeholder="手机动态码"/>
+                    <input id="jsVerifyCode" type="button" class="jsVerifyCode ui-btn ui-btn-danger ui-btn-disable" value="获取动态码" />
+                </li>
+                <li class="item">
+                   <i class="icon iyoyo icon-mima"></i>
+                    <input id="password" class="ui-input" name="newPassword" type="password" autocomplete="off" placeholder="新密码" />
+                </li>
+               
+                <li class="item subbtn">
+                    <a href="javascript:;" class="submit ui-btn ui-btn-danger jSubBtn">提交</a>
+                </li>
+                
+            </ul>
+        </form>
+    </div>
+
+    ${(widget.get("widgets/js.html"))!}
+   <script type="text/javascript">
+    require(['conf/reset-pwd'], function() {});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>直播课</title>
+ <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    ${(widget.get("widgets/meta.html"))!}
+<link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/live.css?v=${staticVersion}" type="text/css" charset="utf-8">
+<script type="text/javascript">
+		$PAGE_DATA['loadUrl']="${basePath!}/course/toApply"
+</script>
+</head>
+<body >
+	 <!-- header -->
+    <!--#include file="./common/header.html"-->
+    ${(widget.get("widgets/header.html"))!}
+	<div class="mod-live">
+
+		<div class="live_top clearfix">
+			<div class="live_top_l">
+				<img data-src ="${(courseItem.coverImageUrl)!}" class="jImg">
+			</div>
+			<div class="live_top_r">
+					<h1>${(courseItem.name)!}</h1>
+				<div class="live_top_con">
+					<div class="col">
+						课程简介： 
+						 ${(courseItem.description)!}
+					</div>
+					<div class="col">
+						<div class="col1">讲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;师：</div>
+						<div class="col2">${(courseItem.teacherName)!}</div>
+					</div>
+					<div class="col">
+						<div class="col1">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：</div> 
+						<div class="col2">${(courseItem.startTimeStr)!} - ${(courseItem.endTimeStr)!}</div>
+					</div>
+					<div class="col">
+						<div class="col1">报名人数：</div> 
+						<div class="col2"><em>${(courseItem.scheduleCounter)!}人</em></div>
+					</div>
+					<div class="col">
+						<div class="col1">学习人数：</div> 
+						<div class="col2"><em>${(courseItem.studyCounter)!}人</em></div>
+					</div>
+					<div class="col">
+						<div class="col1">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：</div> 
+						<div class="col2"><em>${(courseItem.duration)!}分钟</em></div>
+					</div>
+						<#if (indexOperation.code)! == "ended">
+		             		<#if courseItem.doReplay>
+		             			<a href="/course/toCourseDetail?courseId=${(courseItem.id)!}&type=goToReply" class="live_top_btn">观看回放</a>
+		             		<#else>	
+		             			<a id="${(indexOperation.code)!}" class="live_top_btn" style="color:#FDFDFD; background-color:#ccc;">${(indexOperation.title)!}</a>
+							</#if>	
+						<#elseif (indexOperation.code)! == "hasJoined">
+							<!-- 已报名  -->
+							<a id="${(indexOperation.code)!}"  class="live_top_btn hasReport">${(indexOperation.title)!}</a>
+						<#elseif (indexOperation.code)! == "gotoLive">
+							<!-- 进入学习  -->
+							<a id="${(indexOperation.code)!}" href="/course/toCourseDetail?courseId=${(courseItem.id)!}&liveshow=true"  class="live_top_btn enterStudy">${(indexOperation.title)!}</a>
+						<#else>
+							<!-- 我要报名 -->
+							<a id="${(indexOperation.code)!}"  class="live_top_btn goToReport" >${(indexOperation.title)!}</a>
+						</#if>
+				</div>
+			</div>
+		</div>
+
+		<div class="mod-live-detail">
+			<h3>课程简介</h3>
+			<div class="live-detail-wrap">
+				${(courseItem.detail)!}
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="applyCourseId" value="${(courseItem.id)!}">
+	<!-- footer -->
+	 <!--#include file="./common/footer.html"-->
+    <!--#include file="./common/js.html"-->
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+   		 require(['conf/live'], function() {
+    });
+    </script>
+</body>
+</html>

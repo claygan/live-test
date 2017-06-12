@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-autowire="byName">
+
+	<context:property-placeholder location="classpath:config.properties" />
+
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="5000" />
+		<property name="maxIdle" value="50" />
+		<property name="minIdle" value="1" />
+		<property name="maxWaitMillis" value="30000" />
+		<property name="numTestsPerEvictionRun" value="10" />
+		<property name="testWhileIdle" value="true" />
+		<property name="softMinEvictableIdleTimeMillis" value="6000" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+	</bean>
+
+	<bean id="jedisConnFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="192.168.20.31" />
+		<property name="port" value="6379" />
+		<property name="usePool" value="true" />
+		<property name="poolConfig" ref="poolConfig" />
+	</bean>
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnFactory" />
+		<property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<!-- 		<property name="valueSerializer"> -->
+<!-- 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="hashValueSerializer"> -->
+<!-- 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" /> -->
+<!-- 		</property> -->
+	</bean>
+	
+</beans>

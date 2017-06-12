@@ -1,0 +1,13 @@
+ <div style="font-size:30px; color:#333; text-align:center;line-height:200px;">
+	<#if (errorMsg)! == 'notlogin'>
+		用户未登录！
+	<#elseif (errorMsg)! == 'ended'>
+		课程已经结束！
+	<#elseif (errorMsg)! == 'offline'>
+		课程已下架！
+	<#elseif (errorMsg)! == 'isNotBegin'>
+		课程还没有开始!
+	<#else>
+		系统错误！
+	</#if>
+</div>

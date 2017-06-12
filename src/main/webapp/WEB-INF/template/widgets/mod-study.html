@@ -1,0 +1,48 @@
+    <ul class="clearfix">
+    	<#list courseItems as courseItem>
+    		<li>
+	            <a href="/course/toCourseDetail?courseId=${(courseItem.id)!}" class="mod-video">
+	                <img src="${(courseItem.coverImageUrl)!}">
+	                <h2>${(courseItem.name)!}</h2>
+	                <span class="play-icon"><i class="iyoyo icon-video"></i></span>
+	            </a>
+	            <div class="clearfix course-info">
+	                <span class="f-l"><i class="iyoyo icon-play"></i>${(courseItem.studyCounter)!}</span>
+	                <span class="f-r">￥${(courseItem.price)!}</span>
+	            </div>
+	        </li>
+    	</#list>
+<!--         <li> -->
+<!--             <a href="javascript:; " class="mod-video"> -->
+<!--                 <img src=""> -->
+<!--                 <h2>互联网白皮书：90后成主力水淀粉撒打算</h2> -->
+<!--                 <span class="play-icon"><i class="iyoyo icon-video"></i></span> -->
+<!--             </a> -->
+<!--             <div class="clearfix course-info"> -->
+<!--                 <span class="f-l"><i class="iyoyo icon-play"></i>880</span> -->
+<!--                 <span class="f-r">￥28.00</span> -->
+<!--             </div> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--             <a href="javascript:; " class="mod-video"> -->
+<!--                 <img src=""> -->
+<!--                 <h2>互联网白皮书：90后成主力水淀粉撒打算</h2> -->
+<!--                 <span class="play-icon"><i class="iyoyo icon-video"></i></span> -->
+<!--             </a> -->
+<!--             <div class="clearfix course-info"> -->
+<!--                 <span class="f-l"><i class="iyoyo icon-play"></i>880</span> -->
+<!--                 <span class="f-r">￥28.00</span> -->
+<!--             </div> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--             <a href="javascript:; " class="mod-video"> -->
+<!--                 <img src=""> -->
+<!--                 <h2>互联网白皮书：90后成主力水淀粉撒打算</h2> -->
+<!--                 <span class="play-icon"><i class="iyoyo icon-video"></i></span> -->
+<!--             </a> -->
+<!--             <div class="clearfix course-info"> -->
+<!--                 <span class="f-l"><i class="iyoyo icon-play"></i>880</span> -->
+<!--                 <span class="f-r">￥28.00</span> -->
+<!--             </div> -->
+<!--         </li> -->
+    </ul>

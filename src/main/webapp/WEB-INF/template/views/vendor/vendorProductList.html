@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>服务列表页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/service-list.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    $PAGE_DATA['loadUrl']="${basePath!}/vendor/queryVendorProduct";
+    $PAGE_DATA['domId']= "jVendorProduct";
+    </script>
+    <style type="text/css">
+    	.mod-park-list{min-height:500px;}
+    </style>
+</head>
+<body>
+${(widget.get("widgets/header.html"))!}
+<div class="wrap clearfix mod-service-detail">
+    <div class="mod-left f-l">
+        <a href="javascript:;" class="img-wrap"><img data-src="${(vendorItem.logoUrl)!}" alt="" class="jImg"/></a>
+        <div class="info">
+            <h3>${(vendorItem.name)!}</h3>
+            <p><a href="${bathPath!}/vendor/vendorDetail?id=${(vendorItem.id)!}">商家信息</a></p>
+            <p><a href="${bathPath!}/vendor/vendorProduct?id=${(vendorItem.id)!}">服务产品</a></p>
+        </div>
+    </div>
+    <div class="mod-detail f-r">
+    	<div class="mod-park-list" id="jService">
+    	<input type="hidden" id="vendorId" value="${(vendorItem.id?c)!}"/>
+            <ul class="clearfix" id="jVendorProduct">
+            </ul>
+        </div>
+    </div>
+        <!--分页begin-->
+        <div class="mod-page clearfix">
+            <div class="f-r" id="jPagination"></div>
+        </div>
+        <!--分页end-->
+</div>
+${(widget.get("widgets/footer.html"))!}
+${(widget.get("widgets/js.html"))!}
+<script type="text/javascript">
+    require(['conf/service-list'], function() {
+    });
+</script>
+<script id="jWrap" type="text/html">
+	{{each resultList as value i}}
+		<li>
+		<a href="${bathPath!}/vendor/productDetail?id={{value.id}}">
+			<div class="img-wrap"><img data-src="{{value.imgUrl}}" class="jImg"/></div>
+				<h2>{{value.name}}</h2>
+		</a>
+			<p class="clearfix"><span class="f-l">{{value.priceStr}}</span><span class="course-label f-r">{{value.categoryName}}</span></p>
+			<p>{{value.vendorName}}</p>
+		</li>
+	{{/each}}
+</script>
+</body>
+</html>

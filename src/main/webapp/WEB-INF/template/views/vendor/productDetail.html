@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>第三方服务详情页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/service-detail.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+        $PAGE_DATA['loadUrl'] = "${bathPath!}/vendor/showOrder";
+    </script>
+</head>
+<body>
+${(widget.get("widgets/header.html"))!}
+<!--#include file="./common/header.html"-->
+<div class="wrap clearfix mod-service-detail">
+    <div class="mod-left f-l">
+        <a href="javascript:;" class="img-wrap"><img data-src="${(vendorItem.logoUrl)!}" alt="" class="jImg"/></a>
+        <div class="info">
+            <h3>${(vendorItem.name)!}</h3>
+            <p><a href="${bathPath!}/vendor/vendorDetail?id=${(vendorItem.id)!}">商家信息</a></p>
+            <p><a href="${bathPath!}/vendor/vendorProduct?id=${(vendorItem.id)!}">服务产品</a></p>
+        </div>
+    </div>
+    <div class="mod-detail f-r">
+        <div class="top clearfix">
+       		<input type="hidden" id="productId" value="${(vProductItem.id?c)!}"/>
+            <img src="${(vProductItem.imgUrl)!}">
+            <div class="con  f-l">
+                <h3>${(vProductItem.name)!}</h3>
+                <div class="brief">${(vProductItem.description)!}</div>
+                <p >服务类型：${(vProductItem.categoryName)!}</p>
+                <p >发布日期：${(vProductItem.createTime?string("yyyy-MM-dd"))!}</p>
+                <p>价格： ${(vProductItem.priceStr)!}</p>
+                <div  class="purchase jTalk">发起约谈</div>
+                <div class="waitTalk">等待约谈</div>
+            </div>
+        </div>
+
+         <div class="service_item">
+            <ul class="clearfix">
+                <li class="f-l active"><a href="javascript:;">服务详情</a></li>
+                <li class="f-l"><a href="javascript:;">约谈详情</a></li>
+            </ul>
+            <div>
+                <div class="service-info">
+                	${(vProductItem.particulars)!}
+                </div>
+                <div class="service-info talk-detail" style="display:none;">
+	                <#if vendorOrderItems?? && (vendorOrderItems?size > 0)>
+	                	<#list vendorOrderItems as vendorOrderItem>
+	                		<p>
+	                			${(vendorOrderItem.userName)!}发起约谈${(vendorOrderItem.statusName)!} ${(vendorOrderItem.createTimeStr)!}
+	                		</p>
+	                	</#list>
+	                </#if>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+${(widget.get("widgets/footer.html"))!}
+${(widget.get("widgets/js.html"))!}
+<!--#include file="./common/footer.html"-->
+<!--#include file="./common/js.html"-->
+<script type="text/javascript">
+    require(['conf/service-detail'], function() {
+    });
+</script>
+<!-- 资讯列表模板 -->
+<script id="jWrap" type="text/html">
+    {{each resultList as value i}}
+    <li>
+        <a href="javascript:;" class="info-title">{value.title}}</a>
+        <div class="clearfix">
+            <a href="javascript:;" class="img-wrap"><img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="{{value.resourceUrl}}" class="jImg"/></a>
+            <div class="f-r mod-info-detail">
+                <p>{value.text}</p>
+                <span>{value.time}</span>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</script>
+</body>
+</html>

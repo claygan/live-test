@@ -1,0 +1,7 @@
+<ul class="acti-list">
+     <#list newNewsItems as newNewsItem>
+     	<li>
+    		<a href="/profession/toProfessionDetail?professionId=${(newNewsItem.id)!}">${(newNewsItem.title)!}</a>
+		</li>
+     </#list>
+</ul>

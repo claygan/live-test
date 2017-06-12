@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>电商活动</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/activity.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        $PAGE_DATA['loadUrl']="${basePath!}/activity/queryActivity";
+        $PAGE_DATA['domId']= "jActivity";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+    <div class="wrap clearfix">
+        <div class="mod-container f-l">
+            <div class="mod-sub-info clearfix">
+                <div class="mod-area f-l" id="jNav">
+                    <div class="area-selected">
+                        <span>
+                            <i class="iyoyo icon-location"></i>地区
+                        </span>
+                        <a href="javascript:;" class="jSelected">全部</a>
+                        <i class="iyoyo icon-down-sign"></i>
+                    </div>
+                    <div class="area-detail">
+                        <a href="javascript:;" value="-1" class="active">全部</a>
+                        <#list regionItems as regionItem>
+                        	<a href="javascript:;" value="${(regionItem.id)!}">${(regionItem.name)!}</a>
+                        </#list>
+                    </div>
+                </div>
+               <div class="search f-r" id="jTopSearch">
+                    <input class="txt" id="topSearchBar" node-type="ipt" type="text" data-id="name"  placeholder="请输入搜索内容..." />
+                    <button node-type="btn" class="iyoyo icon-search" id="jSearch"></button>
+                </div>
+            </div>
+
+            <div class="info-list">
+                <ul id="jActivity">
+                
+                </ul>
+            </div>
+
+                <!--分页begin-->
+                <div class="mod-page clearfix">
+                    <div class="f-r" id="jPagination"></div>
+                </div>
+                <!--分页end-->
+        </div>
+        <!-- 右侧广告栏 -->
+        <div class="mod-right f-r">
+        <!-- 线上学习 -->
+            <div class="mod-course mt-40">
+                <h2 class="mod-common-title ml-20">线上学习</h2>
+                ${(widget.get("widgets/mod-study.html"))!}
+                <!--#include file="./common/mod-study.html"-->
+            </div>
+        <!-- 电商活动 -->
+            <div class="mod-policy">
+                <h2 class="mod-common-title">电商活动</h2>
+                <ul class="acti-list">
+                	<#list policyNewsItems as policyNewsItem>
+					    <li>
+					        <a href="${bathPath!}/profession/toProfessionDetail?professionId=${(policyNewsItem.id)!}">${(policyNewsItem.title)!}</a>
+					    </li>
+				    </#list>
+				</ul>
+            </div>
+            <!-- 园区辅导 -->
+            <div class="mod-organize">
+                <h2 class="mod-common-title ml-20">园区辅导</h2>
+                ${(widget.get("widgets/mod-park.html"))!}
+            </div>
+        </div>
+    </div>
+
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+    require(['conf/activity'], function() {
+        $(".area-detail").on("click","a",function(){
+            var _this = $(this);
+            $(".jSelected").html(_this.text());
+        })
+
+    });
+    </script>
+</body>
+<!-- 活动列表模板 -->
+<script id="jWrap" type="text/html">
+    {{each resultList as value i}}
+	<li>
+		<a href="${basePath!}/activity/activityDetail.htm?id={{value.id}}" class="info-title">{{value.name}}</a>
+			<div class="clearfix">
+				<a href="${basePath!}/activity/activityDetail.htm?id={{value.id}}" class="img-wrap"><img  data-src="{{value.coverImageUrl}}" class="jImg"/></a>
+				<div class="f-r mod-info-detail">
+					<p>{{value.outline}}</p>
+					<span><i class="iyoyo icon-time"></i>{{value.startTimeStr}}</span>
+					{{if value.city}}
+						<span><i class="iyoyo icon-location"></i>{{value.city}}</span>
+					{{/if}}
+				</div>
+			</div>
+	</li>
+    {{/each}}
+</script>
+</html>

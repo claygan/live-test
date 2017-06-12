@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+	<bean id="cookieUtil" class="com.province.platform.cookies.CookieUtil"/>
+	
+	<bean id="cookieModuleConfigurer" class="com.province.platform.cookies.CookieModuleConfigurer">
+		<property name="cryptoKey" value="^#16qweqv88cde729!@#$3450abfg^%" />
+		<property name="cookieConfigurerList">
+			<util:list>
+				<bean name="utoken" class="com.province.platform.cookies.CookieConfigurer">
+					<property name="domain" value=""/>
+					<property name="lifeTime" value="-1" />
+					<property name="name" value="userId" />
+					<property name="clientName" value="_ui_" />
+					<property name="encrypted" value="true" />
+				</bean>
+				<bean name="ctoken" class="com.province.platform.cookies.CookieConfigurer">
+					<property name="domain" value=""/>
+					<property name="lifeTime" value="-1" />
+					<property name="name" value="companyId" />
+					<property name="clientName" value="_uc_" />
+					<property name="encrypted" value="true" />
+				</bean>
+				<bean name="ltoken" class="com.province.platform.cookies.CookieConfigurer">
+					<property name="domain" value=""/>
+					<property name="lifeTime" value="-1" />
+					<property name="name" value="liveToken" />
+					<property name="clientName" value="_lt_" />
+					<property name="encrypted" value="true" />
+				</bean>
+			</util:list>
+		</property>
+	</bean>	
+	
+</beans>

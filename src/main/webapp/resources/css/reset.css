@@ -1,0 +1,62 @@
+/*====CSS样式重置====*/
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td
+	{
+	margin: 0;
+	padding: 0
+}
+
+body,button,input,select,textarea {
+	font: 14px/24px "Microsoft YaHei", Tahoma, Helvetica, Arial, "宋体",
+		sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+html {
+	_background-image: url(about:blank);
+	_background-attachment: fixed
+}
+
+em,i {
+	font-style: normal
+}
+
+ul,ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #1C1C1C;
+	outline: 0;
+	display: inherit;
+	_blr: expression(this.onFocus = this.blur () )
+}
+
+a,button,input {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	/*-webkit-user-modify: read-write-plaintext-only;*/
+}
+
+img { /* display:block;*/
+	border: none
+}
+
+button,input,select,textarea {
+	font-size: 100%;
+	outline: none;
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+a,span,b,i,em {
+	display: inline-block;
+	font-style: normal;
+}

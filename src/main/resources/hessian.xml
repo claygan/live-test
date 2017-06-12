@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="hessianLiveClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianLiveClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.live.LiveClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianLiveClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianLiveClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="companyRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianCompanyRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.CompanyRemoteService" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianCompanyRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianCompanyRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- courseCounter接口  -->
+	<bean id="courseCounterRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianCourseCounterRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.course.api.CourseCounterRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianCourseCounterRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianCourseCounterRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="msgpushRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianMsgPushClient.url}" />
+		<property name="serviceInterface" value="com.zzh.msgpush.api.MsgpushRemoteService" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianMsgPushClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianMsgPushClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 新闻接口  -->
+	<bean id="newsRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianNewsRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.NewsRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianNewsRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianNewsRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 用户课程接口 -->
+	<bean id="userCourseRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianUserCourseRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.course.api.UserCourseRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianUserCourseRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianUserCourseRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 课程接口 -->
+	<bean id="courseRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianCourseRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.course.api.CourseRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianCourseRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianCourseRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 专题活动接口 -->
+	<bean id="themedActivityRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianThemedActivityRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.ThemedActivityRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianThemedActivityRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianThemedActivityRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 产业园区接口 -->
+	<bean id="industryRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianIndustryRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.IndustryRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianIndustryRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianIndustryRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 提醒远程服务 -->
+	<bean id="remindRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianRemindRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.msgpush.api.RemindRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianRemindRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianRemindRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 用户远程服务 -->
+	<bean id="userRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianUserRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.user.api.UserRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianUserRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianUserRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 行政区划接口  -->
+	<bean id="regionRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianRegionRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.RegionRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianRegionRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianRegionRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 考试远程服务 -->
+	<bean id="examRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianExamRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.exam.api.ExamRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianExamRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianExamRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 服务商远程服务 -->
+	<bean id="vendorRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianVendorRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.vendor.api.VendorRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianVendorRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianVendorRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 服务商远程服务 -->
+	<bean id="productRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianProductRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.vendor.api.ProductRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianProductRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianProductRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 服务商远程服务 -->
+	<bean id="productCommentRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianProductCommentRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.vendor.api.ProductCommentRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianProductCommentRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianProductCommentRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="addServiceRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianAddServiceRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.AddServiceRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianAddServiceRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianAddServiceRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="commentRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianCommentRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.course.api.CommentRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianCommentRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianCommentRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="demandRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianDemandRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.vendor.api.DemandRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianDemandRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianDemandRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 图片分类 -->
+	<bean id="siteRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianSiteRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.SiteRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianSiteRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianSiteRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 精彩瞬间 -->
+	<bean id="dynamicContentRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianDynamicContentRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.DynamicContentRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianDynamicContentRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianDynamicContentRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 短信接口 -->
+	<bean id="smsRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianSmsRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.SmsRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianSmsRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianSmsRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 资源接口 -->
+	<bean id="resourceRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianResourceRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.file.api.ResourceRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianResourceRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianResourceRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 园区接口 -->
+	<bean id="parkRemoteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianParkRemoteService.url}" />
+		<property name="serviceInterface" value="com.zzh.base.api.ParkRemoteService" />
+		<property name="overloadEnabled" value="true"/>
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianParkRemoteService.readTimeout}" />
+				<property name="connectTimeout" value="${hessianParkRemoteService.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+</beans>

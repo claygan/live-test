@@ -1,0 +1,70 @@
+<!-- 公共头部 -->
+<div class="mod-header">
+	<div class="mod-edition clearfix">
+		<div>
+			<a href="/aboutUs" ><i class="iyoyo icon-about-us"></i>关于我们</a>
+            <a href="javascript:;" class="wechat-edition">
+                <i class="iyoyo icon-code"></i>微信版
+                <div class="mod-chat-code">
+                	<#if qrcodeUrl??>
+                		<img src="${(qrcodeUrl)!}?v=${staticVersion}"/>
+                	<#else>
+                		<p style="text-align:center;line-height:85px;font-size: 14px; color:#ccc;">暂无二维码</p>
+                	</#if>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="mod-nav-wrap">
+        <div class="wrap clearfix">
+            <a href="/index" class="logo f-l"><img src="${(logoImg)!}?v=${staticVersion}"></a>
+            <div class="search f-l" id="indexTopSearch">
+                <input class="txt" id="indexSearchBar" node-type="ipt" type="text" data-id="key" placeholder="请输入搜索内容...">
+                <button node-type="btn" class="iyoyo icon-search" id="indexSearch"></button>
+            </div>
+
+            <div class="login-box f-l" id="jLoginStatus">
+            	<#if isLogin?c != "true">
+	                <ul class="tologin clearfix" node-type="tologin" >
+	                    <li class="item mod-login f-l">
+	                        <a href="javascript:;" class="Jlogin"><i class="iyoyo icon-login"></i>登录</a>
+	                    </li>
+	                    <li class="register-btn f-l Jregister">
+	                        <a href="javascript:;">注册</a>
+	                    </li>
+	                </ul>
+                <#else>
+	                <ul class="logined clearfix" node-type="logined">
+	                    <li class="item clearfix">
+	                        <a href="javascript:;" class="user-info f-l"><img src="${(userInfo.avatarUrl)!}"></a>
+	                        <a href="javascript:;" class="user-name txt-overflow f-l" node-type="userName">${(userInfo.nickname)!}</a>
+	                        <i class="iyoyo icon-top-sign"></i><b></b>
+                        	<i class="iyoyo icon-down-sign"></i><b></b>
+	                    </li>
+	                    <li class="tips-menu-box" >
+	                        <a href="/mycenter/myInfo"><span>我的信息</span></a>
+<!-- 	                        <a href="/mycenter/myMessage"><span>我的消息</span></a> -->
+	                        <a href="javascript:;" id="logoutBtn">退出</a>
+	                    </li>
+	                </ul>
+                </#if>
+            </div>
+        </div>
+    </div>
+
+    <div class="mod-nav">
+    	<ul class="nav wrap clearfix">
+    		<#list (navItems)! as nav>
+    			<li class="item <#if modPath! == '${(nav.title)!}'>active</#if>">
+    				<a href="${(nav.link)!}">${(nav.title)!}</a>
+    			</li>
+    		</#list>
+    	</ul>
+    </div>
+</div>
+<script id="tEmpty" type="text/html">
+    <div class="ui-empty-list">
+        <div class="iyoyo icon-box"></div>
+        <div class="txt">暂无数据</div>
+    </div>
+</script>

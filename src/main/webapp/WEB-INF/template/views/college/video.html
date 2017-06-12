@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    ${(widget.get("widgets/meta.html"))!}
+<link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/vedio.css?v=${staticVersion}" type="text/css" charset="utf-8">
+<script type="text/javascript">
+
+         //m3u8播放器地址 必须同域
+        $PAGE_DATA['m3u8'] = '${(resUrl)!}/ckplayer/ckplayer6.7/m3u8.swf';
+        //flash播放器地址 必须同域
+        $PAGE_DATA['ckplayer'] = '${(resUrl)!}/ckplayer/ckplayer6.7/ckplayer.swf';
+        //播放资源路径
+        $PAGE_DATA['play'] = '${(videoUrl)!}';
+        //开始播放时间
+        $PAGE_DATA['startTime'] = 0;
+        //设置当前课程的播放时间
+        $PAGE_DATA['setPlayTime'] = '${basePath!}/course/updateVideoStudyProgress';
+        //设置当前播放时间参数,记得替换
+        $PAGE_DATA['setPlayTimeParams'] = {
+            playTime:0,
+            duration:${(courseItem.duration)!},
+            courseId: ${(courseItem.id)!}
+        };
+       // $PAGE_DATA['examId'] = '${(courseItem.examId)!}';
+</script>
+</head>
+<body class="mod-vedio">
+	 <!-- header -->
+    ${(widget.get("widgets/header.html"))!}
+	<input type="hidden" id="examUrl" value="${courseExamUrl!}">
+	<!-- main -->
+	<div class="video_top" id="jModVideoBox">
+		<div class="video_top_blk player-wrap">
+			<div class="video_top_tit">
+			<input type="hidden" id="courseId" name="courseId" value="${(courseItem.id)!}"/>
+				<div class="fr">
+	                <div id="star" style="display: none;"></div>
+	            	</a>
+            	</div>
+			</div>
+			<div id="flashContent" class="video_top_con">
+					<!-- 播放器 -->
+			</div>
+			<input type="hidden" id="hasLogin" value="${hasLogin?string('true','false')}"/> 
+			<div class="exam-tip" style="height: 100% ;  display: none;">
+				<button id="closePlayerExamTip" type="button" class="close" data-dismiss="exam-tip" style="color: #fff; opacity: 1; margin-right: 10px;">&times;</button>
+				<p class="player-login-content">
+					<a style="margin-top: 240px;" class="btn btn-primary" target="_blank" href="${courseExamUrl!}">进入考试</a>
+				</p>
+			</div>
+		</div>
+		</div>
+	</div>	
+
+	
+	<div class="body_auto cl">
+
+		<div class="video_btm">
+			<div class="live_btm_l">
+				<ul class="video_btm_nav" id="tags">
+					<li class="current teacher"><a href="#tagContent0">课程简介</a></li>
+				</ul>
+				<div id="tagContent" class="tagContent">
+					${(courseItem.detail)!}
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<!-- footer -->
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+   		 require(['conf/vedio'], function() {
+    });
+    </script>
+</body>
+</html>

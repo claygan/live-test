@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<bean id="liveClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianLiveClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.live.LiveClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianLiveClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianLiveClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="appClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianAppClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.manager.AppClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianAppClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianAppClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="appInnerClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianAppInnerClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.manager.AppInnerClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianAppInnerClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianAppInnerClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="roomClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianRoomClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.manager.RoomClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianRoomClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianRoomClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="resourceClient" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="${hessianResourceClient.url}" />
+		<property name="serviceInterface" value="com.zzh.live.remote.client.manager.ResourceClient" />
+		<property name="proxyFactory">
+			<bean class="com.caucho.hessian.client.HessianProxyFactory">
+				<property name="readTimeout" value="${hessianResourceClient.readTimeout}" />
+				<property name="connectTimeout" value="${hessianResourceClient.connectTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+</beans>

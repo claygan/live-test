@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>资讯动态</title>
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/info.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        // 登录页面的路径
+        $PAGE_DATA['loadUrl']="${basePath!}/profession/queryNews";
+        $PAGE_DATA['domId']="professionList";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+    <div class="wrap clearfix">
+        <div class="mod-container f-l">
+        	<#if firstValueItem?? && secondValueItem?? && thirdValueItem??>
+	            <div class="info-show clearfix">
+	                <div class="f-l img-wrap">
+	                    <a href="/profession/toProfessionDetail?professionId=${(firstValueItem.id)!}"><img src="${(firstValueItem.imageUrl)!}" data-src="" class="jImg"/></a>
+	                    <p>${(firstValueItem.title)!}</p>
+	                </div>
+	                <div class="f-r info-title">
+	               		<a href="/profession/toProfessionDetail?professionId=${(secondValueItem.id)!}">
+		                    <p style="background:#fff url(${(secondValueItem.imageUrl)!} )no-repeat center;background-size:cover;">
+		                    	<span>${(secondValueItem.title)!}</span>
+		                    </p>
+		                </a>
+		                <a href="/profession/toProfessionDetail?professionId=${(thirdValueItem.id)!}">
+		                    <p style="background:#fff url(${(thirdValueItem.imageUrl)!} ) no-repeat center;background-size:cover;">
+		                    	<span>${(thirdValueItem.title)!}</span>
+		                    </p>
+		                 </a>
+	                </div>
+	            </div>
+			</#if>
+            <div class="mod-sub-info clearfix">
+                <ul class="f-l clearfix" id="categoryIds">
+                    <li class="active"><a href="javascript:;" value="-1">最新</a></li>
+                    <#list newsCategoryItems as newsCategoryItem>
+                    	<#if newsCategoryItem_index lt 5>
+                    		<li><a href="javascript:;" value="${(newsCategoryItem.id)!}">${(newsCategoryItem.name)!}</a></li>
+                    	</#if>
+                    </#list>
+                    <#if newsCategoryItems?size gt 5>
+                    	<li  class="more-btn">
+	                        <a href="javascript:;"><span>查看更多
+	                        <i class="down-btn"></i>
+	                        <i class="top-btn"></i>
+	                        </span></a>
+	                        <ul class="clearfix mod-more-nav">
+	                        	<#list newsCategoryItems as newsCategoryItem>
+			                    	<#if newsCategoryItem_index gt 4>
+			                    		<li><a href="javascript:;" value="${(newsCategoryItem.id)!}">${(newsCategoryItem.name)!}</a></li>
+			                    	</#if>
+			                    </#list>
+	                        </ul>
+                    	</li>
+                    </#if>
+                </ul>
+               <div class="search f-r" id="jTopSearch">
+                    <input class="txt" id="topSearchBar" node-type="ipt" type="text" data-id="name" value="${(keyWord)!}" placeholder="搜索" />
+                    <button id="jSearch" node-type="btn" class="iyoyo icon-search"></button>
+                </div>
+            </div>
+
+            <div class="info-list">
+                <ul id="professionList">
+<!--                     <li> -->
+<!--                         <a href="javascript:;" class="info-title">王府井2016净利降13.17%去百货化能走多远</a> -->
+<!--                         <div class="clearfix"> -->
+<!--                             <a href="javascript:;" class="img-wrap"><img  data-src="//s1.zzhstatic.com/JXplat/dist/images/default-img.jpg?v=b09e8c0ed2" class="jImg"/></a> -->
+<!--                             <div class="f-r mod-info-detail"> -->
+<!--                                 <p> -->
+<!--                                 当李克强与新西兰总理英格利希乘车缓缓驶入奥克兰郊区一片白色厂房的时候，厂房门口两种颜色的旗帜正在迎风飘扬。一面黑色的旗帜写着“FISHER & PAYKEL(斐雪派克)”，这是新西兰本土最大的家电品牌，另一面蓝色的旗帜写着“Haier(海尔)”，这是中国最大的白色家电品牌。 -->
+<!--                                 </p> -->
+<!--                                 <span>2017年12月30日</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="javascript:;" class="info-title">王府井2016净利降13.17%去百货化能走多远</a> -->
+<!--                         <div class="clearfix"> -->
+<!--                             <a href="javascript:;" class="img-wrap"><img  data-src="//s1.zzhstatic.com/JXplat/dist/images/default-img.jpg?v=b09e8c0ed2" class="jImg"/></a> -->
+<!--                             <div class="f-r mod-info-detail"> -->
+<!--                                 <p> -->
+<!--                                 当李克强与新西兰总理英格利希乘车缓缓驶入奥克兰郊区一片白色厂房的时候，厂房门口两种颜色的旗帜正在迎风飘扬。一面黑色的旗帜写着“FISHER & PAYKEL(斐雪派克)”，这是新西兰本土最大的家电品牌，另一面蓝色的旗帜写着“Haier(海尔)”，这是中国最大的白色家电品牌。 -->
+<!--                                 </p> -->
+<!--                                 <span>2017年12月30日</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </li> -->
+                </ul>
+            </div>
+
+                <!--分页begin-->
+                <div class="mod-page clearfix">
+                    <div class="f-r" id="jPagination"></div>
+                </div>
+                <!--分页end-->
+        </div>
+        <!-- 右侧广告栏 -->
+        <div class="mod-right f-r">
+        	 <!-- 线上学习 -->
+            <div class="mod-course">
+                <h2 class="mod-common-title ml-20">线上学习</h2>
+                <!--#include file="./common/mod-study.html"-->
+                ${(widget.get("widgets/mod-study.html"))!}
+            </div>
+        <!-- 国家政策 -->
+            <div class="mod-policy">
+                <h2 class="mod-common-title">国家政策</h2>
+                 <!--#include file="./common/mod-policy.html"-->
+                 ${(widget.get("widgets/mod-country-policy.html"))!}
+            </div>
+            <!-- 地方政策 -->
+            <div class="mod-policy">
+                <h2 class="mod-common-title">地方政策</h2>
+                 <!--#include file="./common/mod-policy.html"-->
+                 ${(widget.get("widgets/mod-place-policy.html"))!}
+            </div>
+
+            <!-- 电商活动 -->
+            <div class="mod-activity mt-40">
+                <h2 class="mod-common-title">电商活动</h2>
+            <!--#include file="./common/mod-activity.html"-->
+            ${(widget.get("widgets/mod-activity.html"))!}
+            </div>
+            <!-- 园区辅导 -->
+            <div class="mod-organize">
+                <h2 class="mod-common-title ml-20">园区辅导</h2>
+                ${(widget.get("widgets/mod-park.html"))!}
+            </div>
+        </div>
+    </div>
+
+    <!--#include file="./common/footer.html"-->
+    <!--#include file="./common/js.html"-->
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+    require(['conf/info'], function() {
+    });
+    </script>
+<!-- 资讯列表模板 -->
+    <script id="jWrap" type="text/html">
+
+	
+	{{each resultList as value i}}
+	<li>
+    	<a href="/profession/toProfessionDetail?professionId={{value.id}}" class="info-title">{{value.title}}</a>
+    	<div class="clearfix">
+    		<a href="/profession/toProfessionDetail?professionId={{value.id}}" class="img-wrap"><img data-src="{{value.imageUrl}}" class="jImg"/></a>
+    		<div class="f-r mod-info-detail">
+    			<p>{{value.summary}}</p>
+    		<span>{{value.createTime}}</span>
+    		</div>
+    	</div>
+    </li>
+	{{/each}}
+    </script>
+</body>
+</html>

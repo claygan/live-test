@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>电商政策</title>
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/policy.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        $PAGE_DATA['loadUrl']="${basePath!}/policy/queryNews"
+        $PAGE_DATA['domId']="policyList";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    <!--#include file="./common/header.html"-->
+     ${(widget.get("widgets/header.html"))!}
+    <div class="wrap clearfix">
+        <div class="mod-container f-l">
+            <div class="mod-sub-info clearfix">
+                <div class="mod-area clearfix f-l" id="categoryIds">
+                	<span value="0">全部</span>
+                	<#list newsCategoryItems as newsCategoryItem>
+                		<span value="${(newsCategoryItem.id)!}">${(newsCategoryItem.name)!}</span>
+                	</#list>
+<!--                     <span class="active">国家政策</span> -->
+<!--                     <span>地方政策</span> -->
+                </div>
+               <div class="search f-r" id="jTopSearch">
+                    <input class="txt" id="topSearchBar" node-type="ipt" type="text" data-id="name" value="${(keyWord)!}" placeholder="请输入搜索内容..." />
+                    <button id="jSearch" node-type="btn" class="iyoyo icon-search"></button>
+                </div>
+            </div>
+
+            <div class="info-list">
+                <ul id="policyList">
+<!--                     <li> -->
+<!--                         <a href="javascript:;" class="info-title">王府井2016净利降13.17%去百货化能走多远</a> -->
+<!--                         <div > -->
+<!--                             <div class="mod-info-detail"> -->
+<!--                                 <p> -->
+<!--                                 当李克强与新西兰总理英格利希乘车缓缓驶入奥克兰郊区一片白色厂房的时候，厂房门口两种颜色的旗帜正在迎风飘扬。一面黑色的旗帜写着“FISHER & PAYKEL(斐雪派克)”，这是新西兰本土最大的家电品牌，另一面蓝色的旗帜写着“Haier(海尔)”，这是中国最大的白色家电品牌。 -->
+<!--                                 </p> -->
+<!--                                 <span></i>2017年12月30日</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="javascript:;" class="info-title">王府井2016净利降13.17%去百货化能走多远</a> -->
+<!--                         <div > -->
+<!--                             <div class="mod-info-detail"> -->
+<!--                                 <p> -->
+<!--                                 当李克强与新西兰总理英格利希乘车缓缓驶入奥克兰郊区一片白色厂房的时候，厂房门口两种颜色的旗帜正在迎风飘扬。一面黑色的旗帜写着“FISHER & PAYKEL(斐雪派克)”，这是新西兰本土最大的家电品牌，另一面蓝色的旗帜写着“Haier(海尔)”，这是中国最大的白色家电品牌。 -->
+<!--                                 </p> -->
+<!--                                 <span></i>2017年12月30日</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </li> -->
+                    
+                </ul>
+            </div>
+
+                <!--分页begin-->
+                <div class="mod-page clearfix">
+                    <div class="f-r" id="jPagination"></div>
+                </div>
+                <!--分页end-->
+        </div>
+        <!-- 右侧广告栏 -->
+        <div class="mod-right f-r">
+        <!-- 电商活动 -->
+        <!-- 热点资讯 -->
+            <div class="mod-policy ">
+                <h2 class="mod-common-title">热点资讯</h2>
+                 <!--#include file="./common/mod-policy.html"-->
+                 ${(widget.get("widgets/mod-hot-news.html"))!}
+            </div>
+            <!-- 电商活动 -->
+            <div class="mod-activity mt-40">
+                <h2 class="mod-common-title ml-20">电商活动</h2>
+                <!--#include file="./common/mod-activity.html"-->
+                ${(widget.get("widgets/mod-activity.html"))!}
+            </div>
+        </div>
+    </div>
+
+    <!--#include file="./common/footer.html"-->
+    <!--#include file="./common/js.html"-->
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+    require(['conf/policy-index'], function() {
+       
+    });
+    </script>
+<!-- 政策列表模板 -->
+    <script id="jWrap" type="text/html">
+	{{each resultList as value i}}
+	<li>
+    	<a href="/policy/toPolicyDetail?policyId={{value.id}}" class="info-title">{{value.title}}</a>
+    	<div >
+    		<div class="mod-info-detail">
+    			<p>{{value.summary}}</p>
+    			<span>{{value.createTime}}</span>
+    		</div>
+    	</div>
+    </li>
+	{{/each}}
+    </script>
+</body>
+
+</html>

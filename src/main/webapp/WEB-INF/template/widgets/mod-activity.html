@@ -1,0 +1,15 @@
+
+<#list modActivityItems as item>
+	<div class="clearfix mb-20">
+		<a href="${bathPath!}/activity/activityDetail?id=${(item.id)!}" class="f-l acti-img"><img src="${(item.coverImageUrl)!}"></a>
+		<div class="f-l acti-detail">
+			<a href="javascript:;"><h1>${(item.name)!}</h1></a>
+			<p>
+				<span><i class="iyoyo icon-time"></i>${(item.startTimeStr)!}</span>
+				<#if item.city??>
+					<span><i class="iyoyo icon-location"></i>${(item.city)!}</span>
+				</#if>
+			</p>
+		</div>
+	</div>
+</#list>

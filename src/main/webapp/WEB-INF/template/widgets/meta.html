@@ -1,0 +1,25 @@
+<!-- 公共的meta -->
+<meta charset="utf-8"/>
+<script>
+var $PAGE_DATA = window.$PAGE_DATA || {};
+//登录
+$PAGE_DATA['loginUrl'] = '${basePath!}/login/signIn';
+$PAGE_DATA['loginSrc'] = '${basePath!}/login/toLogin';
+//注册
+$PAGE_DATA['registerUrl'] = '${basePath!}/login/signUp';
+$PAGE_DATA['registerSrc'] = '${basePath!}/login/toRegister';
+//重置密码
+$PAGE_DATA['resetPwdUrl'] = '${basePath!}/login/resetPassword';
+$PAGE_DATA['resetPwdSrc'] = '${basePath!}/login/toResetPwd';
+//发送验证码
+$PAGE_DATA['code'] = '${basePath!}/login/sendSmsToMobile';
+//是否登录
+$PAGE_DATA['loginStatus'] = '${(isLogin?c)!}';
+//头部搜索链接
+$PAGE_DATA['headSearchUrl'] = '${basePath!}/profession/index';
+</script>
+<style>
+	.ui-box-iframe{
+		width:360px;
+	}
+</style>

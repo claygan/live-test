@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>首页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        //
+        $PAGE_DATA['loadUrl']="/queryIndexNews";
+        $PAGE_DATA['domId']="jIndexNewsDom";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+	${(widget.get("widgets/header.html"))!}
+    <!-- 轮播区域 -->
+     <div class="mod-slider">
+     		<div class="jImgBlur"></div><!-- 为了做模糊处理的div -->
+            <div class="ui-slider wrap" id="jSlider">
+                <ul class="slider-list">
+                	<#list indexCarousels! as carousel>
+	                    <li class="slider-item" data-img="${(carousel.imgUrl)!}">
+	                        <div class="slider-click">
+	                            <a target="${(carousel.link)!}" href="${(carousel.link)!}" title="${(carousel.title)!}"></a>
+	                            <p>${(carousel.title)!}</p>
+	                        </div>
+	                    </li>
+                    </#list>
+                </ul>
+                <div class="hot-news">
+                    <h1>热点资讯</h1>
+                    <ul>
+                    	<#list newNewsItems! as news>
+                        	<li><a href="/profession/toProfessionDetail?professionId=${news.id}">${(news.title)!}</a></li>
+                        </#list>
+                    </ul>
+                </div>
+                <div class="slider-num">
+                	<#list indexCarousels! as carousel>
+                		<#if carousel_index == 0>
+                    		<a class="hover" href="javascript:void(0)"></a>
+                    	<#else>
+                    		<a href="javascript:void(0)"></a>
+                    	</#if>
+                    </#list>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- 轮播区域end -->
+<div class="wrap clearfix">
+     <div class="mod-container f-l">
+        <div>
+        	<h2 class="mod-level-header"><i class="iyoyo icon-dongtaizixun"></i><span>资讯动态</span></h2>
+        	<div id="jIndexNewsDom">
+        	</div>
+        </div>
+        <!-- 智囊团 -->
+        <div class="mod-teachers">
+            <h2 class="mod-level-header"><i class="iyoyo icon-jinnang"></i><span>智囊团</span></h2>
+             <div class="items swiper-container" id="jSwiper">
+                <div class="items-width clearfix swiper-wrapper">
+                    <a href="javascript:void(0);" class="item tc f-l swiper-slide">
+                        <div class="img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                        </div>
+                        <div class="mod-teacher-intr">
+                            <h3 class="name">电子商务公共服务联盟主席中国电子商务产业园联盟主席</h3>
+                            <div class="job-title">
+                                <span>杭州市电子商务促进会秘书长</span>
+                                <span>杭州市电子商务专家资讯委员会副主任</span>
+                            </div>
+                            <p class="mod-label"><i></i>顾问</p>
+                        </div>
+                        <div class="mod-sm-img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                            <span>张铁柱</span>
+                        </div>
+                    </a>
+
+                    <a href="javascript:void(0);" class="item tc f-l swiper-slide">
+                        <div class="img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                        </div>
+                        <div class="mod-teacher-intr">
+                            <h3 class="name">电子商务公共服务联盟主席中国电子商务产业园联盟主席</h3>
+                            <div class="job-title">
+                                <span>杭州市电子商务促进会秘书长</span>
+                                <span>杭州市电子商务专家资讯委员会副主任</span>
+                            </div>
+                            <p class="mod-label"><i></i>顾问</p>
+                        </div>
+                        <div class="mod-sm-img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                            <span>张铁柱</span>
+                        </div>
+                    </a>
+
+                    <a href="javascript:void(0);" class="item tc f-l swiper-slide">
+                        <div class="img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                        </div>
+                        <div class="mod-teacher-intr">
+                            <h3 class="name">电子商务公共服务联盟主席中国电子商务产业园联盟主席</h3>
+                            <div class="job-title">
+                                <span>杭州市电子商务促进会秘书长</span>
+                                <span>杭州市电子商务专家资讯委员会副主任</span>
+                            </div>
+                            <p class="mod-label"><i></i>顾问</p>
+                        </div>
+                        <div class="mod-sm-img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                            <span>张铁柱</span>
+                        </div>
+                    </a>
+
+                    <a href="javascript:void(0);" class="item tc f-l swiper-slide">
+                        <div class="img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                        </div>
+                        <div class="mod-teacher-intr">
+                            <h3 class="name">电子商务公共服务联盟主席中国电子商务产业园联盟主席</h3>
+                            <div class="job-title">
+                                <span>杭州市电子商务促进会秘书长</span>
+                                <span>杭州市电子商务专家资讯委员会副主任</span>
+                            </div>
+                            <p class="mod-label"><i></i>顾问</p>
+                        </div>
+                        <div class="mod-sm-img">
+                            <img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="http://img1.bbgstatic.com/1584d52b0e7_bc_a0497d85409460dcc0e0ecb723257bb4_1242x680.jpeg" alt="师资团队" class="jImg img-error">
+                            <span>张铁柱</span>
+                        </div>
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="arrow-left" id="jLeft"><i class=" iyoyo icon-left-sign"></i></div>
+            <div class="arrow-right " id="jRight"><i class="iyoyo icon-right-sign"></i></div>
+        </div>
+    </div>
+
+    <div class="mod-right-bar f-r">
+            <!-- 线上学习 -->
+        <h2 class="mod-level-header"><i class="iyoyo icon-study"></i><span>线上学习</span></h2>
+        <div class="mod-course">
+            ${(widget.get("widgets/mod-study.html"))!}
+        </div>
+    <!-- 电商活动-->
+        <h2 class="mod-level-header"><i class="iyoyo icon-huodong"></i><span>电商活动</span></h2>
+        <div class="mod-activity">
+            ${(widget.get("widgets/mod-activity.html"))!}
+            <ul class="acti-list">
+            <#list policyNewsItems as policyNewsItem>
+            	<li>
+			        <a href="/policy/toPolicyDetail?policyId=${(policyNewsItem.id)!}">${(policyNewsItem.title)!}</a>
+			    </li>
+            </#list>
+			</ul>
+        </div>
+        <!-- 园区辅导 -->
+         <h2 class="mod-level-header"><i class="iyoyo icon-zuzhi"></i><span>园区辅导</span></h2>
+        <div class="mod-organize">
+            ${(widget.get("widgets/mod-park.html"))!}
+        </div>
+
+        <!-- 热门链接 -->
+         <h2 class="mod-level-header"><i class="iyoyo icon-lianjie"></i><span>热门链接</span></h2>
+         <ul class="mod-link clearfix">
+         <#list hotLinkItems! as link>	
+             <li>
+                 <a href="${(link.link)!}" target="${(link.openMode)!}"><img src="${(link.imgUrl)!}"/></a>
+             </li>
+         </#list>
+         </ul>
+    </div>
+</div>
+
+    ${(widget.get("widgets/js.html"))!}
+    ${(widget.get("widgets/footer.html"))!}
+    <script type="text/javascript">
+    require(['conf/index'], function() {
+    });
+    
+    </script>
+</body>
+<script id="jWrap" type="text/html">
+{{each resultList as value i}}
+	<div id="jNewsTemp_{{i}}" class="mod-info clearfix">
+            <div class="mod-title"><b>{{value.categoryName}}</b><span>{{value.slogan}}</span></div>
+			{{if value.leftNewsItems.length > 0}}
+	            <ul class="mod-info-show f-l">
+				{{each value.leftNewsItems as left x}}
+	                <li>
+	                    <div>
+	                        <p class="word-show jIntr">
+								<span>{{left.title}}</span>
+							</p>
+	                        <div class="clearfix jDetail mod-hover-show">
+	                            <a href="/profession/toProfessionDetail?professionId={{left.id}}" class="f-l mod-info-img"><img class="jImg" data-src="{{left.imageUrl}}"/></a>
+	                            <div class="f-r mod-detail-info">
+	                                <a href="/profession/toProfessionDetail?professionId={{left.id}}">{{left.title}}</a>
+	                                <p>{{left.summary}}</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+				{{/each}}
+	            </ul>
+            	<ul class="mod-info-show f-r">
+				{{each value.rightNewsItems as right x}}
+	                <li>
+	                    <div>
+	                        <p class="word-show jIntr"><span>
+	                            {{right.title}}
+	                        </span></p>
+	                        <div class="clearfix jDetail mod-hover-show">
+	                            <a href="/profession/toProfessionDetail?professionId={{right.id}}" class="f-l mod-info-img"><img class="jImg" data-src="{{right.imageUrl}}"/></a>
+	                            <div class="f-r mod-detail-info">
+	                                <a href="/profession/toProfessionDetail?professionId={{right.id}}">{{right.title}}</a>
+	                                <p>{{right.summary}}</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+				{{/each}}
+            	</ul>
+            {{else}}
+            	<div class="ui-empty-list">
+        			<div class="iyoyo icon-box"></div>
+        			<div class="txt">暂无数据</div>
+    			</div>
+           	{{/if}}	
+        </div>
+{{/each}}
+</script>
+</html>

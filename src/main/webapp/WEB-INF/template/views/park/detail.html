@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>园区辅导详情页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/park-detail.css?v=${staticVersion}" type="text/css" charset="utf-8">
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+    <div class="mod-park-detail wrap">
+    	<h2 class="bread"><a href="/park/index">园区辅导</a> > ${(parkItem.name)!} > 正文</h2>
+    	<div class="clearfix">
+    		<div class="mod-park-img f-l">
+    			<div class="img-lg"><img data-src="${(parkItem.imgUrl[0])!}" class="jImg" /></div>
+    			<ul class="img-sm clearfix">
+    				<#list (parkItem.imgUrl)! as imgUrl>
+    					<li><img data-src="${(imgUrl)!}" class="jImg"/></li>
+    				</#list>
+    			</ul>
+    		</div>
+    		<div class="f-r mod-park-info">
+    			<h1>${(parkItem.name)!}</h1>
+    			<div><span>房屋类型</span>${(parkItem.buildingType)!}</div>
+    			<div><span>园区地址</span>${(parkItem.address)!}</div>
+    			<div><span>占地面积</span>${(parkItem.area)!}</div>
+    			<div><span>入驻企业</span>${(parkItem.enterpriseNum)!}余家</div>
+    			<div><span>运营公司</span>${(parkItem.operator)!}</div>
+    			<div><span>招商电话</span><b>${(parkItem.call)!}</b></div>
+    		</div>
+    	</div>
+    </div>
+    <div class="park-content">
+    		<div class="wrap">
+    			<h5><b>园区介绍</b></h5>
+    			${(parkItem.content)!}
+    		</div>
+    </div>
+
+    ${(widget.get("widgets/js.html"))!}
+    ${(widget.get("widgets/footer.html"))!}
+    <script type="text/javascript">
+    require(['conf/park-detail'], function() {
+	// 大小图切换效果
+	$(".img-sm").on("click","li",function(){
+			var _this = $(this);
+			$(".img-lg img").attr("src",_this.find("img").attr("src"));
+
+	})
+
+    });
+    </script>
+</body>
+
+</html>

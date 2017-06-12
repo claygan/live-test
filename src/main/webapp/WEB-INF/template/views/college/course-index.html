@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>线上学习</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/study-index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+        // 登录页面的路径
+        $PAGE_DATA['loadUrl']="${basePath!}/course/queryCourse"
+        $PAGE_DATA['domId']="courseList";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+       <div class="wrap course-wrap">
+           <#if bigCourseItem??>
+           <div class="mod-class clearfix">
+               <div class="f-l mod-live">
+                   <a href="/course/toCourseDetail?courseId=${(bigCourseItem.id)!}"><img src="${(bigCourseItem.coverImageUrl)!}" data-src="" class="jImg"/></a>
+                   <div class="course-intr clearfix">
+                       <i class="iyoyo icon-play2 f-l"></i>
+                       <div class="f-l live-info">
+                           <h5>${(bigCourseItem.name)!}</h5>
+                           <#if bigCourseItem.type == 1>
+		                   		<p><span>${(bigCourseItem.time)!}</span></p>   
+		                   <#elseif bigCourseItem.type == 2> 
+		                   		<p><span>时长：${(bigCourseItem.duration)!}分钟</span></p>                	
+		                   </#if>
+                       </div>
+                   </div>
+                   <#if bigCourseItem.type == 1>
+                   		<span class="live-icon">直播</span>    
+                   <#elseif bigCourseItem.type == 2> 
+                   		<span class="live-icon">点播</span>                	
+                   </#if>
+               </div>
+               <div class="f-r mod-hot">
+                   <h2>热门课程</h2>
+                   <#if smallCourseItems??>
+                   <ul>
+                   <#list smallCourseItems as smallCourseItem>
+	                   <li class="clearfix">
+							<a href="/course/toCourseDetail?courseId=${(smallCourseItem.id)!}" class="f-l mod-img"><img src="${(smallCourseItem.coverImageUrl)!}" data-src="" class="jImg"/></a>
+		                    <div class="f-r">
+			                    <h4>${(smallCourseItem.name)!}</h4>
+			                    	<#if smallCourseItem.type == 1>
+			                    		<span>直播</span>
+			                    	<#elseif smallCourseItem.type == 2>	
+			                    		<span>点播</span>		                    	
+			                    	</#if>
+			                    	<#if smallCourseItem.type == 1>
+			                    		<p><span>${(smallCourseItem.time)!}</span></p>
+			                    	<#elseif smallCourseItem.type == 2>	
+			                    		<p><span>时长：${(smallCourseItem.duration)!}分钟</span></p>		                    	
+			                    	</#if>
+		                    </div>
+	                   </li>
+                   </#list>
+                   </ul>
+                   </#if>
+               </div>
+           </div>
+			</#if>
+           <div class="mod-free-course">
+               <div class="nav clearfix">
+                    <span class="f-l">免费好课</span>
+                    <ul class="f-l clearfix" id="categoryIds">
+                    <#if clientCategoryInfos??>
+                    	<#list clientCategoryInfos as clientCategoryInfo>
+                    		<li> 
+	                           <a href="javascript:;" value="${(clientCategoryInfo.id)!}">${(clientCategoryInfo.name)!}</a>
+	                       	</li>
+                    	</#list>
+                    </#if>
+                    
+                </div>
+
+                <div class="mod-course">
+                    <ul class="clearfix" id="courseList">
+                    
+                    </ul>
+
+                </div>
+           </div>
+            <!-- 广告位 -->
+            <#if siteSectionItem??>
+            	<div class="mod-adver"><img src="${(siteSectionItem.imgUrl)!}"/></div>
+            </#if>
+
+            <!-- 智囊团 -->
+            <div class="mod-teachers">
+                <div class="nav clearfix">
+                    <span class="f-l">智囊团</span>
+                    <ul class="f-l jTeachers">
+                       <li class="active">
+                           <a href="javascript:;">顾问团</a>
+                       </li><li>
+                           <a href="javascript:;">导师团</a>
+                       </li><li>
+                           <a href="javascript:;">专家团</a>
+                       </li><li>
+                           <a href="javascript:;">讲师团</a>
+                       </li>
+                    </ul>
+                </div>
+                
+                ${(widget.get("widgets/course/think-tanks.html"))!}
+                 
+            </div>
+       </div>
+
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+    require(['conf/study-index'], function() {
+    });
+    </script>
+<!-- 资讯列表模板 -->
+    <script id="jWrap" type="text/html">
+	{{each resultList as value i}}
+	<li>
+    	<a href="/course/toCourseDetail?courseId={{value.id}}" class="mod-video">
+    		<img src="{{value.coverImageUrl}}"/>
+    		<h2>{{value.name}}</h2>
+    		<span class="play-icon"><i class="iyoyo icon-video"></i></span>
+    	</a>
+    		<div class="clearfix course-info">
+    		<span class="f-l"><i class="iyoyo icon-time"></i>时长：{{value.duration}}分钟</span>
+    		<span class="f-r"><i class="iyoyo icon-man"></i>{{value.studyCounter}}</span>
+    	</div>
+    </li>
+	{{/each}}
+    </script>
+</body>
+
+</html>

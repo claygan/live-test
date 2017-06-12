@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>个人信息</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/person-info.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	$PAGE_DATA['editInfo'] = '${(basePath)!}/mycenter/editPassword';
+        $PAGE_DATA['submit'] = '${basePath!}/mycenter/editInfo';
+        $PAGE_DATA['location'] = '${basePath!}/region/queryRegion?parentId=';
+        $PAGE_DATA['currentPage'] = '1';
+    </script>
+    <style type="text/css">
+    #avatarUploadUploader{
+    	position: absolute;
+	    left: 0;
+	    top: 0;
+	    opacity: 0;
+	    z-index:999;
+    }
+    #jAvater:hover #avatarUploadUploader{
+    	opacity:1
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+    
+    <div class="mod-page">
+        <div class="ifm-uc clearfix">
+        ${(widget.get("widgets/myCenter.html"))!}
+            <div class="ifm-right-container">
+                <div id="jIfmTab" class="ifm-tab">
+                    <div class="ifm-hd clearfix">
+                        <!-- tab 头部 start -->
+                        <ul class="clearfix ifm-tab-hd" node-type="hd">
+                            <li class="ifm-tab-item current" node-type="hdItem" data-target="1"><a href="javascript:;">个人信息</a></li>
+                            <li class="ifm-tab-item" node-type="hdItem" data-target="2"><a href="javascript:;">修改登录密码</a></li>
+                        </ul>
+                        <!-- tab 头部 end -->
+                    </div>
+                    <div class="ifm-tab-bd" node-type="bd">
+                        <!-- tab内容区域-1 start-->
+                        <div class="ifm-tab-container current" node-type="container" data-id="1">
+                            <div class="ifm-main-container">
+                                <!-- 页面主内容 start -->
+                                <div class="mod-personinfo">
+                                    <form id="jInfoForm">
+                                        <div class="in-avater">
+                                            <span class="avater-now">当前头像</span>
+                                            <a href="javascript:;" class="avater" id="jAvater">
+                                                <img id="avatarImageUrl" class="jImg img" src="${(user.avatarUrl)!}">
+                                                <input type="file" name="avatarUpload" id="avatarUpload" value="编辑头像" style="display:none;"/>
+                                            </a>
+                                            <input type="hidden" name="avatarUrl" id="avatarUrl" value="${(user.avatarUrl)!}">
+                                            <input type="hidden" name="avatar" id="avatar" value="${(user.avatar)!}">
+                                        </div>
+                                        <!-- 个人信息统计 -->
+                                        <div class="info clearfix">
+                                            <div class=" item pet">
+                                                <label for="jPet">昵称</label>
+                                                <input type="text" name="nickname" id="jPet" class="ui-input" value="${(user.nickname)!}" placeholder="请输入您的昵称">
+                                            </div>
+                                            <div class="item">
+                                                <label for="jName"><span>*</span>真实姓名</label>
+                                                <input type="text" name="realName" id="jName" class="ui-input" value="${(user.realName)!}" placeholder="请输入您的真实姓名">
+                                            </div>
+                                            <div class="item">
+                                                <label for="jPhonenum"><span></span>手机号码</label>
+                                                <input type="text" id="jPhonenum" disabled class="ui-input" value="${(user.mobile)!}" placeholder="请输入您的手机号码" readonly="readonly">
+                                            </div>
+                                            <div class="item">
+                                                <label for="jMail"><span></span>邮箱</label>
+                                                <input type="text" id="jMail" disabled class="ui-input" value="${(user.eMail)!}" placeholder="请输入您的邮箱" readonly="readonly">
+                                            </div>
+                                            <div class="item">
+                                                <label for="jCareer"><span>*</span>职业</label>
+                                                <input type="text" id="jCareer" value="${(user.jobPost)!}" class="ui-input" name="jobPost" placeholder="请输入您的职业">
+                                            </div>
+                                            <div class="item">
+                                                <label for="jCompany"><span></span>所属公司</label>
+                                                <input type="text" id="jCompany" class="ui-input" name="company" value="${(user.company)!}">
+                                            </div>
+                                            <div class="check">
+                                                	性别
+                                                <input type="radio" id="women" <#if (user.sex)! == 2>checked</#if>  value="2" name="sex"> 
+                                                <label for="women">女</label>
+                                                <input type="radio" id="male" <#if (user.sex)! == 1>checked</#if> value="1" name="sex">
+                                                <label for="male">男</label>
+                                            </div>
+                                            <div class="item">
+                                                <label for="jQQ">QQ</label>
+                                                <input type="text" id="jQQ" name="qq" class="ui-input" value="${(user.qq)!}" placeholder="请输入您的QQ号码">
+                                            </div>
+                                            <div class="inwhere clearfix">
+                                                <span class="where f-l">所在地</span>
+                                                <div id="areaSelect" class="f-l">
+                                                    <select id="province" name="provinceId" class=" form-control" size="1">
+                                                        <option value="0">请选择省</option>
+                                                    </select>
+                                                    <span class="form-control-feedback showError"></span>
+                                                    <select id="city" name="cityId" class=" form-control" size="1">
+                                                        <option value="0">请选择市</option>
+                                                    </select>
+                                                    <span class="form-control-feedback showError"></span>
+                                                    <select id="county" name="countyId" class=" form-control" size="1">
+                                                        <option value="0">请选择区</option>
+                                                    </select>
+                                                    <span class="form-control-feedback showError"></span>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <label for="jAddres">详细地址</label>
+                                                <input type="text" id="JAddres" name="address" class="ui-input" value="${(user.address)!}" placeholder="请输入您的详细地址">
+                                            </div>
+                                        </div>
+                                        <div class="btn">
+                                            <a href="javascript:void(0);" class="submit ui-btn ui-btn-danger jMSubBtn">保存</a>
+                                        </div>
+                                    </form>    
+                                </div>
+                                <!-- 页面主内容 end -->
+                            </div>
+                        </div>
+                        <!-- tab内容区域-1 end-->
+                        <!-- tab内容区域-2 start-->
+                        <div class="ifm-tab-container" node-type="container" data-id="2">
+                            <div class="ifm-main-container">
+                                <!-- 页面主内容 start -->
+                                <div class="mod-personinfo">
+                                    <form id="jFormPwd" autocomplete="off">
+                                        <div class="zpassword clearfix">
+                                            <div class="oldpassword">
+                                                <label for="password">
+                                                    	原登录密码
+                                                </label>
+                                                <input type="password" id="password" class="ui-input" name="oldPassword" placeholder="请输入您的原密码">
+                                            </div>
+                                            <div class="newpassword">
+                                                <label>
+                                                    	新登录密码
+                                                </label>
+                                                <input type="password" id="nepassword" class="ui-input" name="newPassword" placeholder="请确认您的新密码">
+                                            </div>
+                                            <div class="surepassword">
+                                                <label for="sure">
+                                                   		确认新登录密码
+                                                </label>
+                                                <input type="password" id="sure" class="ui-input" name="rePassword" placeholder="请确认您的登录密码">
+                                            </div>
+                                        </div>
+                                        <div class="btn">
+                                            <a href="javascript:void(0);" class="submit ui-btn ui-btn-danger jSubBtn">保存</a>
+                                            <span id="forgetBtn" class="rember"><a href="javascript:;">忘记密码</a></span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- 页面主内容 end -->
+                            </div>
+                        </div>
+                        <!-- tab内容区域-2 end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="provinceId_hide" id="provinceId_hid" value="${(user.provinceId)!}" />
+    <input type="hidden" name="cityId_hide" id="cityId_hid" value="${(user.cityId)!}" />
+    <input type="hidden" name="countyId_hide" id="countyId_hid" value="${(user.countyId)!}" />
+    <input type="hidden" name="sex_hid" id="sex_hid" value="${(user.sex)!}" />
+	${(widget.get("widgets/js.html"))!}
+    ${(widget.get("widgets/footer.html"))!}
+    <script type="text/javascript" src="${resUrl!}/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="${resUrl!}/js/swfobject.js"></script>
+	<script type="text/javascript" src="${resUrl!}/js/jquery.uploadify.v2.1.4.min.js"></script>
+    <script type="text/javascript">
+    require(['conf/person-info'], function() {});
+    //头像上传
+    $('#avatarUpload').uploadify({
+	        'uploader'  : '/resources/js/uploadify/uploadify.swf',
+	        'script'    : '${(imgUploadUrl)!}',
+	        'cancelImg' : '',
+	        'removeCompleted': false,
+	        'buttonImg' : '${resUrl!}/images/editHeader.png',
+	        'auto'      : true,
+	        'width':'80',
+	        'height':'80',
+	        'fileExt'   : '*.jpg;*.jpeg;*.png;*.bmp;',
+	        'fileDesc'  : '请选择支持的格式',
+	        'fileDataName' : 'file',
+	        'queueID'  : 'some_file_queue',
+	        'scriptData' : {'type':'${(type)!}','platform':'${(platform)!}','userId':'${(userId)!}','companyId':'${(companyId)!}','appkey':'${(appkey)!}','sign':'${(sign)!}'},
+	        'scriptAccess' : 'always',
+	        'onComplete': function(event, ID, fileObj, response, data) {
+  				var jsonResponse = jQuery.parseJSON(response);
+  				if(jsonResponse.errorCode == 200){
+  					//
+  					$('#avatar').val(jsonResponse.resourceId);
+  					$('#avatarImageUrl').attr('src', '${(dataUrl)!}' + jsonResponse.url);
+  					$('#avatarUrl').val('${(dataUrl)!}' + jsonResponse.url);		
+  						
+  				}else{
+  					$.ZZHUtils.showClientAlertMessage(jsonResponse.error,'error');
+  				}
+ 			}
+	    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>第三方服务</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/service-index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+	<script type="text/javascript">
+		var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        $PAGE_DATA['loadUrl']="${basePath!}/vendor/queryVProduct";
+        $PAGE_DATA['domId']= "jproduct";
+    </script>
+</head>
+<body>
+${(widget.get("widgets/header.html"))!}
+<div class="wrap mod-service clearfix">
+    <div class="f-l service-tab">
+        <ul class="service_nav " id="service_nav">
+	        <li>
+	        	<h3>全部</h3>
+	        	<div class="tag clearfix">
+	        		<a value="-1" href="javascript:;" title="全部" >全部</a>
+	        	</div>
+	        </li>	
+        	<#list vCategoryParent! as vCategoryParent>
+            <li>
+                <h3>${(vCategoryParent.name)!}</h3>
+                <div class="tag clearfix">
+                	<#list vCategoryChild as vCategoryChild>
+                		<#if (vCategoryParent.id)! == (vCategoryChild.parentId)!>
+                			<a value="${(vCategoryChild.id)!}" href="javascript:;" title="${(vCategoryChild.name)!}" >${(vCategoryChild.name)!}</a>
+                		</#if>
+           			</#list>	
+                </div>
+            </li>
+        </#list>
+        </ul>
+    </div>
+    <div class="f-r service-list">
+        <div class="cateArea" >
+            <span class="mod-tips">服务产品</span>
+              <div class="search f-r" id="jTopSearch">
+              <input class="txt" id="topSearchBar" node-type="ipt" type="text" placeholder="输入搜索内容....">
+              <button node-type="btn" class="iyoyo icon-search" id="jSearch"></button>
+              </div>
+<!--             <span class="mod-confirm f-r">服务商入驻</span> -->
+        </div>
+        <div class="mod-park-list" id="jService">
+            <ul class="clearfix" id="jproduct">
+                
+
+            </ul>
+
+        </div>
+        <!--分页begin-->
+        <div class="mod-page clearfix">
+            <div class="f-r" id="jPagination"></div>
+        </div>
+        <!--分页end-->
+    </div>
+</div>
+${(widget.get("widgets/js.html"))!}
+${(widget.get("widgets/footer.html"))!}
+<script type="text/javascript">
+    require(['conf/service-index'], function() {
+    });
+</script>
+<!-- 资讯列表模板 -->
+<script id="jWrap" type="text/html">
+	{{each resultList as value i}}
+		<li>
+		<a href="${bathPath!}/vendor/productDetail?id={{value.id}}">
+			<div class="img-wrap"><img data-src="{{value.imgUrl}}" class="jImg"/></div>
+				<h2>{{value.name}}</h2>
+		</a>
+			<p class="clearfix"><span class="f-l">{{value.priceStr}}</span>
+				{{if value.categoryName}}
+					<span class="course-label f-r">{{value.categoryName}}</span>
+				{{/if}}
+			</p>
+			<p>{{value.vendorName}}</p>
+		</li>
+	{{/each}}
+</script>
+</body>
+</html>

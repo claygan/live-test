@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>电商政策详情</title>
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/policy-detail.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+        // 登录页面的路径
+        $PAGE_DATA['applyUrl']=""
+        $PAGE_DATA['loadUrl']="${bathPath!}/policy/index";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    <!--#include file="./common/header.html"-->
+    ${(widget.get("widgets/header.html"))!}
+    <div class="wrap clearfix">
+        <div class="mod-container f-l">
+            <div class="nav-bread"><a href="${(bathPath)!}/policy/index">电商政策</a>> ${(newsDetailItem.title)!} > 正文</div>
+            <div class="mod-info-detail">
+                <h1>${(newsDetailItem.title)!}</h1>
+                <div>
+                    <span>发布人：${(newsDetailItem.createUserName)!}</span>
+                    <span>来源：${(newsDetailItem.provenance)!}</span>
+                    <span>${(newsDetailItem.createTimeStr)!}</span>
+                </div>
+                <div style="padding:20px;line-height:30px;">
+                	${(newsDetailItem.content)!}
+                </div>
+            </div>
+        </div>
+        <!-- 右侧广告栏 -->
+        <div class="mod-right f-r">
+            <div class="mod-search">
+                <div class="search f-l" id="jTopSearch">
+                    <input class="txt" id="topSearchBar" node-type="ipt" type="text" data-id="key" placeholder="请输入搜索内容...">
+                    <button node-type="btn" class="iyoyo icon-search" id="jSearch"></button>
+                </div>
+            </div>
+            
+			 <!-- 线上学习 -->
+            <div class="mod-course">
+                <h2 class="mod-common-title ml-20">线上学习</h2>
+                <!--#include file="./common/mod-study.html"-->
+                ${(widget.get("widgets/mod-study.html"))!}
+            </div>
+        <!-- 国家政策 -->
+            <div class="mod-policy ">
+                <h2 class="mod-common-title">国家政策</h2>
+                 <!--#include file="./common/mod-policy.html"-->
+				 ${(widget.get("widgets/mod-country-policy.html"))!}                 
+            </div>
+            <!-- 地方政策 -->
+            <div class="mod-policy">
+                <h2 class="mod-common-title">地方政策</h2>
+                 <!--#include file="./common/mod-policy.html"-->
+                 ${(widget.get("widgets/mod-place-policy.html"))!}
+            </div>
+
+            <!-- 电商活动 -->
+            <div class="mod-activity mt-40">
+                <h2 class="mod-common-title">电商活动</h2>
+            <!--#include file="./common/mod-activity.html"-->
+            ${(widget.get("widgets/mod-activity.html"))!}
+            </div>
+            <!-- 园区辅导 -->
+            <div class="mod-organize">
+                <h2 class="mod-common-title ml-20">园区辅导</h2>
+                ${(widget.get("widgets/mod-park.html"))!}
+            </div>
+        </div>
+    </div>
+
+    <!--#include file="./common/footer.html"-->
+    <!--#include file="./common/js.html"-->
+    ${(widget.get("widgets/footer.html"))!}
+    ${(widget.get("widgets/js.html"))!}
+    <script type="text/javascript">
+    require(['conf/policy-detail'], function() {
+    });
+    </script>
+<!-- 资讯列表模板 -->
+    <script id="jWrap" type="text/html">
+    {{each resultList as value i}}
+    <li>
+         <a href="javascript:;" class="info-title">{value.title}}</a>
+            <div class="clearfix">
+                 <a href="javascript:;" class="img-wrap"><img src="//s1.zhongzhihui.com/lib/assets/images/s.gif" data-src="{{value.resourceUrl}}" class="jImg"/></a>
+                <div class="f-r mod-info-detail">
+                    <p>{value.text}</p>
+                    <span>{value.time}</span>
+                </div>
+            </div>
+    </li>
+    {{/each}}
+    </script>
+</body>
+
+</html>

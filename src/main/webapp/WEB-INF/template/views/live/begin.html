@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+${(widget.get("widgets/meta.html"))!}
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/study-index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+<style type="text/css">
+	#liveIframe{
+		width: 100%;
+  	 	height: 577px;
+   		margin-top: 9px;
+	}
+	.video_top{
+		background: #f4f4f4 !important;
+	}
+	.body_auto{width:1200px;margin:0 auto;}
+	.teacher{
+			font-size: 20px;
+		    color: #333;
+		    margin: 20px 0;
+		}
+</style>
+</head>
+<body class="z-page20">
+	 <!-- header -->
+	${(widget.get("widgets/header.html"))!}
+<div id="ecpip_login" class="popup-window" style="display: none;">
+	<div class="title" style="border: none;">用户登录</div>
+	<form>
+		<input id="username" name="username" type="text" placeholder="用户名" class="text username">
+		<label id="labelForUsername" style="color: red;"></label>
+		<input id="password" name="password" type="password" placeholder="密码" class="text password" style="margin-bottom: 10px;">
+		<label for="remeber" style="color: #ccc;font-size: 14px;">
+			<input type="checkbox" checked="checked" id="remeber">  记住我
+		</label> 
+<!-- 		<a href="" class="forgot">忘记密码?</a>  -->	
+		<a href="javascript:login();" class="go"></a>
+	</form>
+</div>
+
+
+	<!-- main -->
+	<div class="video_top">
+		<div class="video_top_blk player-wrap">
+			<h2 id="resultShow"></h2>
+			<button><a href="javascript:toLiveUrl();" id="liveUrl">点击进入直播页面</a></button>
+		</div>
+	</div>
+
+	<div class="body_auto cl">
+
+		<div class="video_btm">
+			<div class="live_btm_l">
+				<ul class="video_btm_nav" id="tags">
+					<li class="current teacher">课程简介</li>
+				</ul>
+				<div id="tagContent">
+					<div class="live_btm_l_con live_con_teacher fl" id="tagContent0" >
+						
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<!-- footer -->
+	${(widget.get("widgets/js.html"))!}
+	${(widget.get("widgets/footer.html"))!}
+	<script type="text/javascript" src="${resUrl!}/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="${resUrl!}/js/jquery.raty.min.js"></script>
+	
+	 <script type="text/javascript">
+    	require(['conf/live-show'], function() {
+    		var courseName = '${(courseItem.name)!}';
+    		$('.video_btm_nav li').click(function()
+    		{
+    			var n = $('.video_btm_nav li').index(this);
+    			$('.video_btm_nav li').removeClass('current');
+    			$(this).addClass('current');
+
+    			$(".live_btm_l_con").hide();
+    			$(".live_btm_l_con").eq(n).show();	
+    		})
+
+    		$(document).ready(function() {
+    			
+    		})
+    });
+    	var webinarId = '${webinar_id}';
+    	var appKey;
+    	var signed_at;
+    	var sign;
+    	var is_sec_auth;
+   		function toLiveUrl(){
+   			$.ajax({
+				type: "POST",
+				url: "/course/authParam",
+				data: {
+					webinarId: webinarId,
+				},
+				dataType: "json",
+				async:false,
+				success: function(result){
+					appKey = result.appKey;
+					signed_at = result.signed_at;
+					sign = result.sign;
+					is_sec_auth = result.is_sec_auth;
+				}
+			});
+   			
+   			$.ajax({
+				type: "POST",
+				url: "http://e.vhall.com/api/vhallapi/v2/webinar/start",
+				data: {
+					auth_type:2,
+					app_key: appKey,
+					signed_at: signed_at,
+					sign: sign,
+					webinar_id: webinarId,
+					is_sec_auth: is_sec_auth
+				},
+				dataType: "json",
+				success: function(result){
+					if(result.code == 200){
+						window.location.href=result.data;
+					}else{
+						$("#resultShow").text(result.msg);
+					}
+				}
+			});
+   		}
+    </script>
+</body>
+</html>

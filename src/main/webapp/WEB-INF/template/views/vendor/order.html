@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>约谈详情</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/talk.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	$PAGE_DATA['loadUrl'] = "${bathPath!}/vendor/toOrder";
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    <!-- 主要内容 start-->
+    <form class="mod-form" id="jSigninForm">
+        <ul class="ulform" id="jContainer">
+            <li class="item">
+                <label class="mark">账号</label>
+                <input  class="ui-input ui-readonly" name="account" type="text" readonly value="${(userEntityInfo.eMail)!}" />
+            </li>
+            <li class="item">
+                <label class="mark">服务产品</label>
+                <input type="hidden" id="vProductId" value="${(vProductItem.id)!}"/>
+                <input class="ui-input ui-readonly" name="project" type="text" readonly value="${(vProductItem.name)!}" />
+            </li>
+             <li class="item">
+                <label class="mark"><i class="necessary">*</i>姓名</label>
+                <input class="ui-input" name="username" type="text"  value="${(userEntityInfo.realName)!}" placeholder="请输入姓名" />
+            </li>
+            <li class="item">
+                <label class="mark"><i class="necessary">*</i>手机号</label>
+                <input class="ui-input" name="mobile" type="text" value="${(userEntityInfo.mobile)!}" placeholder="请填写您的手机号"/>
+            </li>
+             <li class="item">
+                <label class="mark">留言</label>
+                <textarea class="ui-input ui-text" name="remark" type="text" value=""></textarea>
+            </li>
+            <li class="item">
+                <a href="javascript:;" class="submit ui-btn ui-btn-danger jMSubBtn" id="jMSubBtn">提交</a>
+            </li>
+        </ul>
+    </form>
+    <!-- 主要内容 end-->
+    ${(widget.get("widgets/js.html"))!}
+    <!--#include file="./common/js.html"-->
+    <script type="text/javascript">
+        require(['conf/talk'], function() {});
+    </script>
+</body>
+
+</html>

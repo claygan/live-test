@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>注册</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/register.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    
+    <div class="mod-form clearfix">
+        <form id="jsRightSignin" class="right-signin common f-r">
+            <ul class="ulform">
+                <li class="item">
+                   <i class="icon iyoyo icon-admin"></i>
+                    <input  class="ui-input" name="username" autocomplete="off" type="text" placeholder="用户名" />
+                </li>
+                <li class="item">
+                    <i class="icon iyoyo icon-email-1"></i>
+                    <input id="jEmail" class="ui-input" name="email" type="email" autocomplete="off" placeholder="邮箱"/>
+                </li>
+                <li class="item">
+                   <i class="icon iyoyo icon-phone-1"></i>
+                    <input id="jMobile" class="ui-input" name="mobile" autocomplete="off" type="text" placeholder="手机号" />
+                </li>
+                <li class="item no-border">
+                    <i class="icon iyoyo icon-shield"></i>
+                    <input id="jDynamic" class="ui-input jDynamic" name="code" type="text" autocomplete="off" placeholder="动态验证码"/>
+                    <input id="jsVerifyCode" type="button" class="jsVerifyCode ui-btn ui-btn-danger ui-btn-disable" value="获取动态码" />
+                </li>
+                
+                <li class="item">
+                   <i class="icon iyoyo icon-mima"></i>
+                    <input id="password" class="ui-input " name="password" type="password" autocomplete="off" placeholder="密码" />
+                </li>
+                <li class="item">
+                   <i class="icon iyoyo icon-mima"></i>
+                    <input class="ui-input" name="confirmpwd" type="password" autocomplete="off" placeholder="确认密码" />
+                </li>
+                <li class="accept">
+                    <p>注册即表示已阅读并接受在线<span class="clause jPopBtn">注册条款</span></p>
+                </li>
+                <li class="item subbtn">
+                    <a href="javascript:;" class="submit ui-btn ui-btn-danger jSubBtn">立即注册</a>
+                </li>
+                <li class="item last">
+                    <span class="f-r">已有账号,<a href="javascript:;" class="register jToLogin">立即登录</a></span>
+                    
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    ${(widget.get("widgets/js.html"))!}
+   <script type="text/javascript">
+    require(['conf/register'], function() {});
+    </script>
+</body>
+
+</html>

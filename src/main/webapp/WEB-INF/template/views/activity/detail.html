@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>活动详情页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="${basePath!}/resources/css/detail.css"/>
+    <link rel="stylesheet" href="${basePath!}/resources/css/reset.css"/>
+    <script type="text/javascript">
+    	$PAGE_DATA['applyUrl']="${basePath!}/activity/apply?id=${(themedActivityItem.id)!}";
+    </script>
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/activity.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <style>
+    	.content{margin-top:0;}
+    	.closeBtnHide .layui-layer-close2{display:none;}
+    	.table input{
+		    text-align: left;
+		    width: 180px;
+		    padding-left: 10px;
+		    }
+		   .table select{
+		    	float:left;
+		    }
+		   select[name="province"]{
+		    	margin-left:14x;
+		    }
+		     .table select.dynmicInput{
+		     margin-left:14px;margin-top:13px;
+		     }
+		    .region select {
+		    margin-top: 13px;
+		    }
+		    .table li{padding-left:15px;}
+		    .table select[name="gender"]{
+		    	margin-left:40px;
+		    }
+		   .content header b{cursor: pointer;}
+		   .table i{color:red;}
+		   .choice{right:0;}
+		   .ui-box-iframe {
+    width: 450px;
+}
+.choice a:hover{color:#fff;}
+    </style>
+</head>
+<body>
+<div class="header">
+${(widget.get("widgets/header.html"))!}
+</div>
+   <div class="detailWrap clearfix">
+        <div class="detailLeft fl">
+            <div class="detailTit clearfix">
+                <a href="javascript:void(0);" class="fl"><img src="${(themedActivityItem.coverImageUrl)!}" /></a>
+                <div class="fr">
+                    <h1>
+                        <a href="javascript:void(0);">${(themedActivityItem.name)!}</a>
+                    </h1>
+                    <p><span>时   &nbsp; &nbsp;   间：</span>${(themedActivityItem.startTimeStr)!} - ${(themedActivityItem.endTimeStr)!}</p>
+                    <p><span>地   &nbsp; &nbsp;  点：</span>${(themedActivityItem.address)!}</p>
+                    <p><span>组织单位： </span>${(themedActivityItem.host)!}</p>
+                    <p><span>咨询电话：</span>${(themedActivityItem.contactNumber)!}</p>
+                    <p><span>活动规模：</span>${(themedActivityItem.scale)!}</p>
+                    <div class="choice">
+                    	<#if (themedActivityItem.status)! == 2>
+                    		<a class="end" href="javascript:void(0);">已结束</a>
+                    	<#else>
+                    	<#if (themedActivityItem.baominged)! >
+								<a class="apply" href="javascript:void(0);" >已报名</a>
+						<#else>
+								<a class="unApply" href="javascript:void(0);" id="jReport">我要报名</a>
+                    	</#if>
+                    	</#if>
+                    </div>
+                </div>
+            </div>
+            <div class="actDetail">
+                <h2>活动详情</h2>
+                <p>
+                    ${(themedActivityItem.detail)!}
+                </p>
+            </div>
+        </div>
+   </div>
+	<!-- footer 开始-->
+${(widget.get("widgets/footer.html"))!}
+${(widget.get("widgets/js.html"))!}
+	<!-- footer 结束-->
+   <script type="text/javascript">
+    require(['conf/activity-detail'], function() {
+    });
+    </script>
+
+
+  
+</body>
+</html>

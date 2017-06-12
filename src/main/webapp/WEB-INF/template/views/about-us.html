@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>关于我们</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/about-us.css?v=${staticVersion}" type="text/css" charset="utf-8">
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+    <div class="mod-about-us wrap clearfix">
+        <div class="f-l us-info">
+            <h1>联系我们</h1>
+            <i class="iyoyo icon-dizhi"></i>
+            <div><span>ADD:</span><span class="adress">${(address)!}</span></div>
+            <i class="iyoyo icon-dianhua"></i>
+            <div><span>TEL:</span><span>${(tel)!}</span></div>
+            <i class="iyoyo icon-email-1"></i>
+            <div><span>E-mail:</span><span>${(email)!}</span></div>
+        </div>
+        <div class="f-r map">
+            <img data-src="${(locationImgUrl)!}?v=${staticVersion}" class="jImg">
+        </div>
+    </div>
+    ${(widget.get("widgets/js.html"))!}
+    ${(widget.get("widgets/footer.html"))!}
+    <script type="text/javascript">
+    require(['conf/about-us'], function() {
+    });
+    </script>
+</body>
+
+</html>

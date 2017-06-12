@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>第三方服务商家详情页</title>
+    ${(widget.get("widgets/meta.html"))!}
+    <!--#include file="./common/meta.html"-->
+    <!--#include file="./common/css.html"-->
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/service-vendor.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+${(widget.get("widgets/header.html"))!}
+<!--#include file="./common/header.html"-->
+<div class="wrap clearfix mod-service-detail">
+    <div class="mod-left f-l">
+        <a href="javascript:;" class="img-wrap"><img data-src="${(vendorItem.logoUrl)!}" alt="" class="jImg"/></a>
+        <div class="info">
+            <h3>${(vendorItem.name)!}</h3>
+            <p><a href="${bathPath!}/vendor/vendorDetail?id=${(vendorItem.id)!}">商家信息</a></p>
+            <p><a href="${bathPath!}/vendor/vendorProduct?id=${(vendorItem.id)!}">服务产品</a></p>
+        </div>
+    </div>
+    <div class="mod-detail f-r">
+       <h3>${(vendorItem.name)!}</h3>
+       <ul class="col_000 mb_30">
+            <li>联系人：${(vendorItem.contactPerson)!}</li>
+            <li>联系手机：${(vendorItem.mobile)!}</li>
+            <li>联系邮箱：${(vendorItem.email)!}</li>
+            <li>主页：${(vendorItem.page)!}</li>
+            <li>地址：${(vendorItem.address)!}</li>
+        </ul>
+        <p>公司简介：${(vendorItem.description)!}</p>
+    </div>
+</div>
+${(widget.get("widgets/footer.html"))!}
+${(widget.get("widgets/js.html"))!}
+<!--#include file="./common/footer.html"-->
+<!--#include file="./common/js.html"-->
+<script type="text/javascript">
+    require(['conf/service-vendor'], function() {
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+<ul class="clearfix">
+	<#list parkItems as parkItem>
+		<li>
+        <a href="/park/detail?id=${(parkItem.id)!}">
+            <img src="${(parkItem.imgUrl[0])!}"/>
+            <h2>${(parkItem.name)!}</h2>
+        </a>
+        <div class="organize-detail">
+            <p><i class="iyoyo icon-range"></i>${(parkItem.area)!}</p>
+            <p><i class="iyoyo icon-storage"></i>${(parkItem.buildingType)!}</p>
+        </div>
+    </li>
+	</#list>
+<!--     <li> -->
+<!--         <a href="javascript:;"> -->
+<!--             <img src=""/> -->
+<!--             <h2>定海区电子商务园</h2> -->
+<!--         </a> -->
+<!--         <div class="organize-detail"> -->
+<!--             <p><i class="iyoyo icon-range"></i>占地面积600平米</p> -->
+<!--             <p><i class="iyoyo icon-storage"></i>写字楼/文化创意</p> -->
+<!--         </div> -->
+<!--     </li> -->
+<!--     <li> -->
+<!--         <a href="javascript:;"> -->
+<!--             <img src=""/> -->
+<!--             <h2>定海区电子商务园</h2> -->
+<!--         </a> -->
+<!--         <div class="organize-detail"> -->
+<!--             <p><i class="iyoyo icon-range"></i>占地面积600平米</p> -->
+<!--             <p><i class="iyoyo icon-storage"></i>写字楼/文化创意</p> -->
+<!--         </div> -->
+<!--     </li> -->
+<!--     <li> -->
+<!--         <a href="javascript:;"> -->
+<!--             <img src=""/> -->
+<!--             <h2>定海区电子商务园</h2> -->
+<!--         </a> -->
+<!--         <div class="organize-detail"> -->
+<!--             <p><i class="iyoyo icon-range"></i>占地面积600平米</p> -->
+<!--             <p><i class="iyoyo icon-storage"></i>写字楼/文化创意</p> -->
+<!--         </div> -->
+<!--     </li> -->
+</ul>

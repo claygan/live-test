@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>园区辅导</title>
+     ${(widget.get("widgets/meta.html"))!}
+    <link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/park-index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+    <script type="text/javascript">
+    	var $PAGE_DATA=window.$PAGE_DATA||{startTime:new Date};
+        //
+        $PAGE_DATA['loadUrl']="${basePath!}/park/queryPark";
+        $PAGE_DATA['domId']="jParkDom";
+    </script>
+    <style type="text/css">
+    .mod-park{ min-height: 426px;}
+    </style>
+</head>
+
+<body>
+    <!-- 我是注释 -->
+    ${(widget.get("widgets/header.html"))!}
+     <div class="mod-park wrap">
+        <div class="mod-sub-info clearfix">
+            <div class="mod-area f-l" id="jNav">
+                <div class="area-selected">
+                    <span>
+                        <i class="iyoyo icon-location"></i>地区
+                    </span>
+                    <a href="javascript:;" class="jSelected">全部</a>
+                    <i class="iyoyo icon-down-sign"></i>
+                </div>
+                <div class="area-detail">
+                    <a href="javascript:;" value="-1">全部</a>
+                    <#list areaItems! as area>
+                    	<a href="javascript:;" value="${(area.id)!}">${(area.name)!}</a>
+                    </#list>
+                </div>
+            </div>
+           <div class="search f-r" id="jTopSearch">
+                <input class="txt" id="topSearchBar" node-type="ipt" type="text" data-id="name" value="" placeholder="请输入搜索内容..." />
+                <button id="jSearch" node-type="btn" class="iyoyo icon-search"></button>
+            </div>
+        </div>
+
+        <div class="mod-park-list">
+            <ul id="jParkDom" class="clearfix">
+            </ul>
+             
+        </div>
+        <!--分页begin-->
+                <div class="mod-page clearfix">
+                    <div class="f-r" id="jPagination"></div>
+                </div>
+                <!--分页end-->
+     </div>
+    ${(widget.get("widgets/js.html"))!}
+    ${(widget.get("widgets/footer.html"))!}
+    <script type="text/javascript">
+    require(['conf/park-index'], function() {
+    });
+    </script>
+<!-- 园区列表模板 -->
+    <script id="jWrap" type="text/html">
+    {{each resultList as value i}}
+		<li>
+			<a href="/park/detail?id={{value.id}}">
+				<div class="img-wrap"><img data-src="{{value.imgUrl[0]}}" class="jImg"/></div>
+				<h2>{{value.name}}</h2>
+			</a>
+			<p>{{value.address}}</p>
+		</li>
+    {{/each}}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>报名详情</title>
+	${(widget.get("widgets/meta.html"))!}
+	<link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/apply.css?v=${staticVersion}" type="text/css" charset="utf-8">
+	<script type="text/javascript">
+		$PAGE_DATA['location'] = "${basePath!}/activity/toShowArea?pid=";
+		$PAGE_DATA['submitUrl'] = "${basePath!}/activity/toApplyActivity";
+	</script>
+</head>
+<body>
+	<!-- 我是注释 -->
+	<!-- 主要内容 start-->
+	<form class="mod-form" id="jSigninForm">
+	<ul class="ulform" id="jContainer">
+		<#list constfields! as constfield>
+			<#if constfield.code == "const_company">
+				<li class="item"><label class="mark"><i class="necessary">*</i>${(constfield.name)!}</label><input class="ui-input" placeholder="请填写公司信息" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="school" /></li>
+			</#if>
+			<#if constfield.code! == "const_name">
+				<li class="item"><label class="mark"><i class="necessary">*</i>${(constfield.name)!}</label><input class="ui-input" placeholder="请填写联系人信息" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="realname" /></li>
+			</#if>
+			<#if constfield.code! == "const_mobile">
+				<li class="item"><label class="mark"><i class="necessary">*</i>${(constfield.name)!}</label><input class="ui-input" placeholder="请填写手机号信息" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="mobile" /></li>
+			</#if>
+			<#if constfield.code! == "const_job">
+				<li class="item"><label class="mark"><i class="necessary">*</i>${(constfield.name)!}</label><input class="ui-input" placeholder="请填写岗位信息" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="job" /></li>
+			</#if>
+					
+			<#if constfield.type! =="select">
+				<li class="item"><label class="mark"><#if constfield.required><i class="necessary">*</i></#if>${(constfield.name)!}</label>
+					<select class="dynmicInput ui-input" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="${(constfield.code)!}" title="请选择${(constfield.name)!}" <#if constfield.required >required</#if>>
+						<option value="" selected class="ui-input">请选择</option>
+						<#list  constfield.valueString! as value >		
+							<option value="${(value)!}">${(value)!}</option>
+						</#list>
+					</select>
+				</li>
+			</#if>
+			<#if constfield.type! =="region">
+				<li class="${(constfield.type)!} item" id="area"><label class="mark"><#if constfield.required ><i class="necessary">*</i></#if>${(constfield.name)!}</label><input id="region" class="dynmicInput" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="${(constfield.code)!}" type="hidden"/>
+					<select name="province" id="province" class="ui-input" style="width:90px;" title="请选择省" <#if constfield.required >required</#if>>
+						<option value="">请选择省</option>
+					</select>
+					<select name="city" id="city" class="ui-input" style="width:90px;" title="请选择市" <#if constfield.required >required</#if>>
+					<option value="">请选择市</option>
+					</select>
+					<select name="county" id="county" class="ui-input" style="width:90px;"title="请选择区县" <#if constfield.required >required</#if>>
+						<option value="">请选择区县</option>
+					</select>
+				</li>
+			</#if>
+			<#if constfield.type! == "text" >
+				<li class="item"><label class="mark"><#if constfield.required><i class="necessary">*</i></#if>${(constfield.name)!}</label><input class="dynmicInput ui-input" placeholder="请输入信息" fieldId="${(constfield.optfieldId)!}" fieldName="${(constfield.name)!}" name="${(constfield.code)!}" type="${(constfield.type)!}"/></li>
+			</#if>
+		</#list>	
+		<li class="item">
+			<a href="javascript:;" class="submit ui-btn ui-btn-danger jMSubBtn" id="jMSubBtn">提交</a>
+		</li>
+	</ul>
+	</form>
+	<input type="hidden" value="${(id)!}" id="activityId">
+	<!-- 主要内容 end-->
+	${(widget.get("widgets/js.html"))!}
+	<script type="text/javascript">
+	require(['conf/apply'], function() {});
+	</script>
+</body>
+<script type="text/html" id="tEmpty">
+	<p>空模板</p>
+</script>
+</html>

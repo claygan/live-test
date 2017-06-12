@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+${(widget.get("widgets/meta.html"))!}
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" href="//s1.zzhstatic.com/JXplat/dist/css/conf/study-index.css?v=${staticVersion}" type="text/css" charset="utf-8">
+<style type="text/css">
+	#liveIframe{
+		width: 100%;
+  	 	height: 577px;
+   		margin-top: 9px;
+	}
+	.video_top{
+		background: #f4f4f4 !important;
+	}
+	.body_auto{width:1200px;margin:0 auto;}
+	.teacher{
+			font-size: 20px;
+		    color: #333;
+		    margin: 20px 0;
+		}
+</style>
+</head>
+<body class="z-page20">
+	 <!-- header -->
+	${(widget.get("widgets/header.html"))!}
+<div id="ecpip_login" class="popup-window" style="display: none;">
+	<div class="title" style="border: none;">用户登录</div>
+	<form>
+		<input id="username" name="username" type="text" placeholder="用户名" class="text username">
+		<label id="labelForUsername" style="color: red;"></label>
+		<input id="password" name="password" type="password" placeholder="密码" class="text password" style="margin-bottom: 10px;">
+		<label for="remeber" style="color: #ccc;font-size: 14px;">
+			<input type="checkbox" checked="checked" id="remeber">  记住我
+		</label> 
+<!-- 		<a href="" class="forgot">忘记密码?</a>  -->	
+		<a href="javascript:login();" class="go"></a>
+	</form>
+</div>
+
+
+
+	<div class="body_auto cl">
+
+		<div class="video_btm">
+			<div class="live_btm_l">
+				<ul class="video_btm_nav" id="tags">
+					<li class="current teacher">用户列表</li>
+					<#list userList! as user>
+						<li>${(user.user_id)!}</li>
+					</#list>
+				</ul>
+				<div id="tagContent">
+					<div class="live_btm_l_con live_con_teacher fl" id="tagContent0" >
+						<button id="changeUserPower">点击修改权限</button>
+						<h3 id="msgshow">${(errormsg)!}</h3>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<!-- footer -->
+	${(widget.get("widgets/js.html"))!}
+	${(widget.get("widgets/footer.html"))!}
+	<script type="text/javascript" src="${resUrl!}/js/jquery-1.11.3.min.js"></script>
+	
+	 <script type="text/javascript">
+    	require(['conf/live-show'], function() {
+
+    		$(document).ready(function() {
+    			var userList = '${(userList)!}';
+    			console.log(userList);
+    			//
+    			$("#changeUserPower").click(function(){
+    				$.ajax({
+    					type:"POST",
+    					url:"/live/changeUserPower",
+    					data:{
+    						userId:userId
+    					},
+    					datatype:"json",
+    					success:function(result){
+    						console.log(result);
+    						$("#msgshow").text(result.msg);
+    					}
+    				})
+    			})
+    		})
+    		
+    });
+    </script>
+</body>
+</html>
